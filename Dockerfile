@@ -33,9 +33,13 @@ RUN /etc/init.d/mysql start \
   && chmod +x /etc/my_init.d/01_start_mysql.sh \
   && useradd -G sudo -u 1000 -m vagrant \
   && echo "vagrant ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers \
-  && mkdir -p /vagrant-dev /vagrant/src /vagrant/bin
+  && mkdir -p /vagrant-dev /vagrant/src /vagrant/bin \
+  && ln -sf /vagrant-dev/node_modules /vagrant/node_modules \
+  && ln -sf /vagrant-dev/bower_components /vagrant/bower_components
 
 COPY ./provision/docker/vagrant.bashrc /home/vagrant/.bashrc
+COPY ./git_hooks/post-checkout /home/vagrant/.git/hooks/post-checkout
+COPY ./git_hooks/post-merge /home/vagrant/.git/hooks/post-merge
 
 WORKDIR /vagrant
 
