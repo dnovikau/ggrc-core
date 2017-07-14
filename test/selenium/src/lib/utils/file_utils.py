@@ -3,6 +3,9 @@
 """Utils for manipulation with directories and files."""
 
 import csv
+import os
+import time
+
 from collections import defaultdict
 
 
@@ -12,6 +15,11 @@ def get_list_objs_scopes_from_csv(path_to_csv):
   objects scopes (dicts with keys as exportable field names, values as values
   of this field for current instance).
   """
+  timeout = 10
+  while not os.path.exists(path_to_csv) and timeout > 0:
+    time.sleep(1)
+    timeout -= 1
+
   with open(path_to_csv) as csv_file:
     rows = csv.reader(csv_file)
     object_type = None
