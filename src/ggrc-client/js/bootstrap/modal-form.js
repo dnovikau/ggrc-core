@@ -38,7 +38,6 @@ import {confirm} from '../plugins/utils/modals';
           }
         }.bind(this))
         .on('keypress', 'form', $.proxy(this.keypress_submit, this))
-        .on('keyup', 'form', $.proxy(this.keyup_escape, this))
         .on('click.modal-form.close', '[data-dismiss="modal"]', $.proxy(this.hide, this))
         .on('click.modal-form.reset', 'input[type=reset], [data-dismiss="modal-reset"]', $.proxy(this.reset, this))
         .on('click.modal-form.submit', 'input[type=submit], [data-toggle="modal-submit"]', $.proxy(this.submit, this))
@@ -152,13 +151,6 @@ import {confirm} from '../plugins/utils/modals';
           e.preventDefault();
           this.$form().submit();
         }
-      }
-    },
-
-    keyup_escape: function (e) {
-      if ($(document.activeElement).is('select, [data-toggle=datepicker]') && e.which === 27) {
-        this.$element.attr('tabindex', -1).focus();
-        e.stopPropagation();
       }
     },
 

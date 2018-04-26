@@ -662,6 +662,7 @@ export default can.Control({
     }
     this.setup_wysihtml5(); // in case the changes in values caused a new wysi box to appear.
   },
+  // TODO: consider remove this section
   '[data-before], [data-after] change': function (el, ev) {
     var date;
     var data;

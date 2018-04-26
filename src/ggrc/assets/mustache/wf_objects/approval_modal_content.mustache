@@ -6,7 +6,10 @@
 <form action="javascript://">
   <div class="row-fluid">
     <div class="span12">
-      <label>Object for review <i class="fa fa-question-circle" rel="tooltip" title="Title and description of the object"></i></div>
+      <label>
+        Object for review
+        <i class="fa fa-question-circle" rel="tooltip" title="Title and description of the object"></i>
+      </label>
       <h3>{{#using object=instance.original_object}}{{object.title}}{{/using}}</h3>
       {{#using object=instance.original_object}}
         {{{object.description}}}
@@ -23,45 +26,45 @@
       </label>
       <div class="people-autocomplete">
         {{^if_config_exist 'external_services.Person'}}
-        <input tabindex="2" type="text" name="contact.email" null-if-empty="true" class="span11 search-icon required" value="{{firstnonempty instance.contact.email}}" placeholder="Find reviewer" data-lookup="Person">
+          <input
+            tabindex="2"
+            type="text"
+            name="contact.email"
+            null-if-empty="true"
+            class="span11 search-icon required"
+            value="{{firstnonempty instance.contact.email}}"
+            placeholder="Find reviewer"
+            data-lookup="Person">
         {{else}}
-        <inline-autocomplete-wrapper
-          {instance}="instance"
-          {path}="'contact'"
-          {display-prop}="'email'"
-          {text-value}="instance.contact.email">
-          <external-data-autocomplete
-            {type}="'Person'"
-            {placeholder}="'Find reviewer'"
-            (item-selected)="setItem(%event.selectedItem)"
-            (criteria-changed)="setItem(%event.value)"
-            {auto-clean}="false"
-            {min-length}="2"
-            {search-criteria}="textValue">
-          </external-data-autocomplete>
-        </inline-autocomplete-wrapper>
+          <inline-autocomplete-wrapper
+            {instance}="instance"
+            {path}="'contact'"
+            {display-prop}="'email'"
+            {text-value}="instance.contact.email">
+            <external-data-autocomplete
+              {type}="'Person'"
+              {placeholder}="'Find reviewer'"
+              (item-selected)="setItem(%event.selectedItem)"
+              (criteria-changed)="setItem(%event.value)"
+              {auto-clean}="false"
+              {min-length}="2"
+              {search-criteria}="textValue">
+            </external-data-autocomplete>
+          </inline-autocomplete-wrapper>
         {{/if_config_exist}}
       </div>
     </div>
     <div class="span4">
-      <label for="task_group_assignee">
-        <span>Due date</span>
-        <span class="required">*</span>
-        <i class="fa fa-question-circle" rel="tooltip" title="Set review due date"></i>
-      </label>
-
-      <div class="datepicker__input-wrapper">
-        <i class="fa fa-calendar"></i>
-        <input
-          tabindex="4"
-          class="date input-small"
-          name="end_date"
-          data-toggle="datepicker_today_or_later"
-          placeholder="MM/DD/YYYY"
-          type="text"
-          autocomplete="off"
-          value="{{localize_date instance.end_date true}}">
-      </div>
+      <datepicker
+        label="Due date"
+        helptext="Set review due date"
+        {name}="'end_date'"
+        set-min-date="{{date_today}}"
+        deny-input="true"
+        no-weekends="true"
+        required="true"
+      >
+      </datepicker>
     </div>
   </div>
 </form>

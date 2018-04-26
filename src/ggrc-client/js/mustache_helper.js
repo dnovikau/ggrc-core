@@ -1102,6 +1102,11 @@ Mustache.registerHelper('localize_date_today', function (value) {
   return localizeDate(value, value, 'MM/DD/YYYY');
 });
 
+Mustache.registerHelper('date_today', function () {
+  let today = moment().startOf('day');
+  return JSON.stringify(today);
+});
+
 Mustache.registerHelper('capitalize', function (value, options) {
   value = resolveComputed(value) || '';
   return can.capitalize(value);

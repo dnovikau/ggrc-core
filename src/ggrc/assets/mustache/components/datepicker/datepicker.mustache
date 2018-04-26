@@ -7,11 +7,11 @@
   {{#if label}}
     <label>
       {{label}}
-      {{#if helptext}}
-        <i class="fa fa-question-circle" rel="tooltip" title="{{helptext}}"></i>
-      {{/if}}
       {{#if required}}
         <span class="required">*</span>
+      {{/if}}
+      {{#if helptext}}
+        <i class="fa fa-question-circle" rel="tooltip" title="{{helptext}}"></i>
       {{/if}}
     </label>
   {{/if}}
@@ -25,6 +25,7 @@
       {{/if_helpers}}
       placeholder="{{MOMENT_DISPLAY_FMT}}"
       type="text"
+      name="{{name}}"
       class="datepicker__input date {{#if denyInput}}datepicker__input--denied{{/if}}"
       {(value)}="_date"
       can-focus="onFocus"

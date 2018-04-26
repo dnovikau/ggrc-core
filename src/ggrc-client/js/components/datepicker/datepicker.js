@@ -53,6 +53,10 @@
       onSelect: function (val, ev) {
         this.attr('date', val);
         this.attr('isShown', false);
+
+        if (this.input && this.input.attr('name') === 'end_date') {
+          this.input.trigger('change');
+        }
       },
       onFocus: function (el, ev) {
         this.attr('showTop', false);
@@ -67,6 +71,10 @@
 
         this.picker.datepicker('setDate', null);
         this.attr('date', null);
+
+        if (this.input && this.input.attr('name') === 'end_date') {
+          this.input.trigger('change');
+        }
       },
       MOMENT_DISPLAY_FMT: GGRC.Date.MOMENT_DISPLAY_FMT,
     }),
@@ -74,7 +82,7 @@
     events: {
       inserted: function () {
         let viewModel = this.viewModel;
-        let element = this.element.find('.datepicker__calendar');
+        let picker = this.element.find('.datepicker__calendar');
         let minDate;
         let maxDate;
         let date;
@@ -88,9 +96,8 @@
         if (viewModel.attr('noWeekends')) {
           options.beforeShowDay = can.$.datepicker.noWeekends;
         }
-
-        element.datepicker(options);
-        viewModel.attr('picker', element);
+        viewModel.attr('input', options.altField);
+        viewModel.attr('picker', picker.datepicker(options));
 
         date = this.getDate(viewModel.attr('date'));
         viewModel.picker.datepicker('setDate', date);
@@ -123,6 +130,8 @@
           // should never happen, but that would require refactoring the way
           // Date objects are created throughout the app.
           return moment(date).format(GGRC.Date.MOMENT_ISO_DATE);
+        } else if (typeof date === 'string') {
+          return moment(new Date(date)).format(GGRC.Date.MOMENT_ISO_DATE);
         } else if (this.isValidDate(date)) {
           return date;
         }
