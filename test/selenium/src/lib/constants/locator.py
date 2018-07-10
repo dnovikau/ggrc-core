@@ -745,6 +745,15 @@ class WidgetInfoPanel(CommonWidgetInfo):
   # People section
   PEOPLE_HEADERS_AND_VALUES = (By.CSS_SELECTOR, ".editable-people-group")
 
+  # Local custom attributes section
+  DATE_CA_INPUT = (By.CSS_SELECTOR, '.datepicker__input.date')
+  DATE_CA_FIELDS = (By.CSS_SELECTOR, '[data-handler="selectDay"]')
+  DROPDOWN_CA_ITEM = (By.XPATH, ".//select")
+  RICH_TEXT_CA_INPUT = (By.XPATH, ".//p")
+  PERSON_CA = (By.CSS_SELECTOR, ".person-name")
+  CA_SAVED_STATUS = (
+      By.CSS_SELECTOR, "custom-attributes-status loading-status")
+
 
 class WidgetSnapshotsInfoPanel(WidgetInfoPanel):
   """Locators specific for Info panels of snapshotable objects."""
@@ -825,8 +834,7 @@ class WidgetInfoAssessment(WidgetInfoPanel, CommonAssessment):
   HEADERS_AND_VALUES = (By.CSS_SELECTOR, ".ggrc-form-item__multiple-row")
   # Base
   LCAS_HEADERS_AND_VALUES = (
-      By.CSS_SELECTOR,
-      WIDGET + " .field-wrapper.flex-size-1")
+      By.CSS_SELECTOR, "custom-attributes div[class*='custom-attribute']")
   CAS_HEADERS_AND_VALUES = (
       By.CSS_SELECTOR,
       WIDGET + " assessment-custom-attributes inline-edit-control")

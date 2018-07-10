@@ -419,6 +419,25 @@ class BaseWebUiService(object):
     related_asmts_table = obj_page.show_related_assessments()
     return related_asmts_table.get_related_titles(asmt_type=obj.type)
 
+  def open_info_page_of_obj_fill_lca(self, obj):
+    """Open obj Info Page. Populate local custom attributes with random values.
+    Only Date population implemented.
+    """
+    def update_custom_attr_val(upd_obj, upd_cas):
+      """Update custom attribute values in custom_attribute_definitions"""
+      attrs = []
+      for attr_name, attr_value in upd_cas.iteritems():
+        for attr in upd_obj.custom_attribute_definitions:
+          if attr['title'].upper() == attr_name.upper():
+            attrs.append({'custom_attribute_id': attr['id'],
+                          'attribute_value': attr_value})
+      return attrs
+
+    ca_values = self.open_info_page_of_obj(obj).fill_lcas_attr_values()
+    updated_attrs = update_custom_attr_val(obj, ca_values)
+    obj.update_attrs(custom_attribute_values=updated_attrs)
+    return obj
+
 
 class SnapshotsWebUiService(BaseWebUiService):
   """Class for snapshots business layer's services objects."""
