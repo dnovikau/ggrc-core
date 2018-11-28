@@ -7,17 +7,17 @@
 <div class="hideable-holder">
 {{#instance}}
 <form action="javascript://">
-  {{> /static/mustache/base_objects/form_restore.mustache}}
+  {{>/static/mustache/base_objects/form_restore.stache}}
 
   <div class="row-fluid">
-    <div class="span6 {{#instance.computed_errors.title}}field-failure{{/instance.computed_errors.title}}">
+    <div class="span6">
       <label>
         Title
         <span class="required">*</span>
         <i class="fa fa-question-circle" rel="tooltip" title="Give new {{model.model_plural}} a name that's easy to search for and indicates the main goals of this {{model.model_singular}}."></i>
       </label>
       <input data-id="title_txtbx" tabindex="1" class="input-block-level" placeholder="Enter Title" name="title" type="text" value="{{title}}" autofocus>
-      {{#instance.computed_errors.title}}<label class="help-inline warning">{{this}}</label>{{/instance.computed_errors.title}}
+      <label class="help-inline warning">{{this}}</label>
     </div>
   </div>
 
@@ -39,7 +39,7 @@
     </div>
   </div>
 
-  {{> /static/mustache/partials/modal-ajax-test-plan.mustache}}
+  {{>/static/mustache/partials/modal-ajax-test-plan.stache}}
 
   <div class="row">
     <div class="span12 hide-wrap hidable">
@@ -68,7 +68,7 @@
     </div>
     <div class="span6 hide-wrap hidable">
       <div class="row-fluid inner-hide">
-        {{> '/static/mustache/base_objects/modal-content-reference-urls.mustache'}}
+        {{>/static/mustache/base_objects/modal-content-reference-urls.stache}}
       </div>
     </div>
   </div>
@@ -111,9 +111,9 @@
           <i class="fa fa-question-circle" rel="tooltip" title="Indicates the status of this object."></i>
           <a data-id="hide_state_lk" href="javascript://" class="field-hide" tabindex="-1">hide</a>
         </label>
-          <dropdown options-list="model.statuses"
-                    name="instance.status"
-                    tabindex="23">
+          <dropdown options-list="{model.statuses}"
+                    name="{instance.status}"
+                    tabindex="{23}">
           </dropdown>
       </div>
     </div>

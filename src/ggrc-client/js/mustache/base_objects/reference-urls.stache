@@ -6,7 +6,7 @@
 {{#instance}}
   <div class="row-fluid wrap-row">
     <div data-test-id="title_reference_url_aa7d1a65">
-      <related-documents instance={}{instance} kind="{REFERENCE_URL}">
+      <related-documents instance="{instance}" kind="{REFERENCE_URL}">
         <related-urls
           {instance}="{instance}"
           {(urls)}="{documents}"
@@ -16,7 +16,7 @@
           (createUrl)="{createRelatedDocument(%event.payload)}"
           (removeUrl)="{removeRelatedDocument(%event.payload)}">
           <div class="related-urls__heading">
-            <spinner class="related-urls__spinner" {toggle}="isLoading"></spinner>
+            <spinner class="related-urls__spinner" {toggle}="{isLoading}"></spinner>
             <h6 class="related-urls__title">Reference URL</h6>
           </div>
         </related-urls>

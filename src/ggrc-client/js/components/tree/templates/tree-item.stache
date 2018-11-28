@@ -32,7 +32,7 @@
               {{#case 'default'}}
                 <div class="owner attr-content">
                   {{#instance}}
-                    {{> attrTemplate}}
+                    {{>attrTemplate}}
                   {{/instance}}
                 </div>
               {{/case}}

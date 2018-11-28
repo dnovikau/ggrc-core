@@ -83,7 +83,7 @@
 
         <div class="row-fluid wrap-row">
           <div class="span12">
-            {{>'/static/mustache/custom_attributes/info.mustache'}}
+            {{>/static/mustache/custom_attributes/info.stache}}
           </div>
         </div>
       </tab-panel>

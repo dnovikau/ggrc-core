@@ -60,14 +60,14 @@
                 </deletable-people-group>
                 <div>
                   {{#if isUpdating}}
-                    <spinner {toggle}="isUpdating"></spinner>
+                    <spinner {toggle}="{isUpdating}"></spinner>
                   {{else}}
                     {{#if canEdit}}
                       {{^if_config_exist 'external_services.Person'}}
                       <autocomplete
-                          search-items-type="Person"
-                          (item-selected)="addPerson(%event.selectedItem, @groupId)"
-                          {placeholder}="placeholder">
+                          search-items-type="{Person}"
+                          (item-selected)="{addPerson(%event.selectedItem, @groupId)}"
+                          {placeholder}="{placeholder}">
                       </autocomplete>
                       {{else}}
                       <external-data-autocomplete

@@ -71,10 +71,10 @@
       </small>
     </div>
     <dropdown tabindex="17"
-              options-list="model.conclusions"
-              no-value="true"
-              no-value-label="---"
-              name="instance.design">
+              options-list="{model.conclusions}"
+              no-value="{true}"
+              no-value-label="{---}"
+              name="{instance.design}">
     </dropdown>
   </div>
   <div class="ggrc-form-item__multiple-row">
@@ -86,11 +86,11 @@
         <em>Is this control design effective?</em>
       </small>
     </div>
-    <dropdown tabindex="18"
-              options-list="model.conclusions"
-              no-value="true"
-              no-value-label="---"
-              name="instance.operationally">
+    <dropdown tabindex="{18}"
+              options-list="{model.conclusions}"
+              no-value="{true}"
+              no-value-label="{---}"
+              name="{instance.operationally}">
     </dropdown>
   </div>
 </div>

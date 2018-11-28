@@ -21,7 +21,7 @@
     </div>
   </div>
 
-  {{>'/static/mustache/base_objects/contacts.mustache'}}
+  {{>/static/mustache/base_objects/contacts.stache}}
 
 
   <div class="row-fluid">

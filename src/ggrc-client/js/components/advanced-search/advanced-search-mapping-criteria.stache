@@ -26,7 +26,7 @@
       </div>
       <div class="mapping-criteria__action">
         {{#if showPopover}}
-          <simple-popover {button-text}="{'+ Add''}" extra-css-class="{advanced-search}" placement="{top}">
+          <simple-popover {button-text}="{'+ Add'}" extra-css-class="{advanced-search}" placement="{top}">
             <button type="button"
                     class="mapping-criteria__action-button"
                     ($click)="addRelevant()">

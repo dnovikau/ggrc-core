@@ -117,7 +117,7 @@
           </div>
         </a>
       </li>
-      {{#current_user_is_admin}}
+      {{#current_user_is_admin .}}
         <li>
           <a href="/admin#!people_list" class="admin-btn">
             <div class="oneline">

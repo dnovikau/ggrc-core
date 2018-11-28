@@ -3,7 +3,6 @@
     Licensed under http://www.apache.org/licenses/LICENSE-2.0 <see LICENSE file>
 }}
 
-
 {{#switch attr_name}}
   {{#case 'modified_by'}}
     <model-loader {path}="{'business-models/person'}">
@@ -74,7 +73,7 @@
 
   {{#default}}
     {{#if_equals attr_name 'reference_url'}}
-      <related-documents instance={}{instance} kind="{REFERENCE_URL}">
+      <related-documents instance="{instance}" kind="{REFERENCE_URL}">
         <div class="reference-urls-list">
           {{#each documents}}
             <span class="reference-urls-list__item">

@@ -8,11 +8,11 @@
     {{labelName}}
   </label>
   <dropdown
-    {class-name}="'input-block-level js-toggle-field'"
-    {options-list}="peopleValues"
-    name="selectedValue"
-    ($change)="dropdownChanged"
-    {no-value}="hasEmptyValue"
+    {class-name}="{'input-block-level js-toggle-field'}"
+    {options-list}="{peopleValues}"
+    name="{selectedValue}"
+    ($change)="{dropdownChanged}"
+    {no-value}="{hasEmptyValue}"
   ></dropdown>
 </div>
 
@@ -21,16 +21,16 @@
 {{#if_equals selectedValue 'other'}}
   {{^if_config_exist 'external_services.Person'}}
     <autocomplete
-      {search-items-type}="'Person'"
-      (item-selected)="personAdded(%event)"
-      {placeholder}="'Enter text to search for {{listName}}'"
+      {search-items-type}="{'Person'}"
+      (item-selected)="{personAdded(%event)}"
+      {placeholder}="{'Enter text to search for {{listName}}'}"
     ></autocomplete>
   {{else}}
     <external-data-autocomplete
-      {type}="'Person'"
-      {placeholder}="'Enter text to search for {{listName}}'"
-      {min-length}="2"
-      (item-selected)="personAdded(%event)">
+      {type}="{'Person'}"
+      {placeholder}="{'Enter text to search for {{listName}}'}"
+      {min-length}="{'Person'}"
+      (item-selected)="{personAdded(%event)}">
     </external-data-autocomplete>
   {{/if_config_exist}}
 
@@ -39,9 +39,9 @@
   {{/validation_error}}
 
   {{#each peopleList}}
-    <person-data {person-id}="{{.}}">
-      <a href="javascript://" class="unmap" title="Remove"
-        ($click)="removePerson(person)">
+    <person-data {person-id}="{.}">
+      <a href="javascript://" class="unmap" title="{Remove}"
+        ($click)="{removePerson(person)}">
       <i class="fa fa-trash"></i>
       </a>
     </person-data>

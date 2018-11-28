@@ -36,7 +36,7 @@
           {items}="{items}"
           {is-loading}="{isLoading}"
           {list-type}="{'GRID'}">
-            {{>'/static/mustache/task_group_tasks/task_group_subtree.mustache'}}
+            {{>/static/mustache/task_group_tasks/task_group_subtree.stache}}
         </object-list>
       </div>
     </div>

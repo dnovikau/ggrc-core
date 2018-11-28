@@ -6,7 +6,7 @@
 <div class="hideable-holder">
 {{#instance}}
 <form action="javascript://">
-  {{> /static/mustache/base_objects/form_restore.mustache}}
+  {{>/static/mustache/base_objects/form_restore.stache}}
 
   <div class="row-fluid">
     <div class="span4">

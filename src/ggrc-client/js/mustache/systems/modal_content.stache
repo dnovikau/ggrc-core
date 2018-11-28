@@ -7,7 +7,7 @@
 <div class="hideable-holder">
 {{#instance}}
 <form action="javascript://">
-  {{> /static/mustache/base_objects/form_restore.mustache}}
+  {{>/static/mustache/base_objects/form_restore.stache}}
 
   <!-- Title Row -->
   <div class="row-fluid">
@@ -41,7 +41,7 @@
     </div>
   </div>
 
-  {{> /static/mustache/partials/modal-ajax-test-plan.mustache}}
+  {{>/static/mustache/partials/modal-ajax-test-plan.stache}}
 
   <div class="row">
     <div class="span12 hide-wrap hidable">
@@ -71,7 +71,7 @@
     </div>
     <div class="span6 hide-wrap hidable">
       <div class="row-fluid inner-hide">
-        {{> '/static/mustache/base_objects/modal-content-reference-urls.mustache'}}
+        {{>/static/mustache/base_objects/modal-content-reference-urls.stache}}
       </div>
     </div>
   </div>
@@ -115,9 +115,9 @@
         <i class="fa fa-question-circle" rel="tooltip" title="Indicates the status of this object."></i>
         <a data-id="hide_state_lk" href="javascript://" class="field-hide" tabindex="-1">hide</a>
       </label>
-        <dropdown options-list="model.statuses"
-                  name="instance.status"
-                  tabindex="23">
+        <dropdown options-list="{model.statuses}"
+                  name="{instance.status}"
+                  tabindex="{23}">
         </dropdown>
     </div>
   </div>

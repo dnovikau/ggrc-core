@@ -6,7 +6,7 @@
 <div class="hideable-holder">
   {{#instance}}
   <form action="javascript://">
-    {{> /static/mustache/base_objects/form_restore.mustache}}
+    {{>/static/mustache/base_objects/form_restore.stache}}
 
     {{#if new_object_form}}
     {{^if object_params.program}}
@@ -52,9 +52,9 @@
           <a data-id="hide_status_lk" href="javascript://" class="field-hide" tabindex="-1">hide</a>
         </label>
         <div tabindex="4">
-            <dropdown options-list="model.statuses"
-                      name="instance.status"
-                      tabindex="23">
+            <dropdown options-list="{model.statuses}"
+                      name="{instance.status}"
+                      tabindex="{23}">
             </dropdown>
         </div>
       </div>
@@ -107,19 +107,19 @@
       <div data-id="planned_start_date_hidden" class="span3 hidable">
         <a data-id="hide_effective_date_lk" href="javascript://" class="field-hide" tabindex="-1">hide</a>
         <datepicker
-          label="Planned Start Date"
-          date="start_date"
-          set-max-date="end_date"
-          tabindex="20"
+          label="{'Planned Start Date'}"
+          date="{start_date}"
+          set-max-date="{end_date}"
+          tabindex="{20}"
           />
       </div>
       <div data-id="planned_end_date_hidden" class="span3 hidable">
         <a data-id="hide_stop_date_lk" href="javascript://" class="field-hide" tabindex="-1">hide</a>
         <datepicker
-          label="Planned End Date"
-          set-min-date="start_date"
-          date="end_date"
-          tabindex="21"
+          label="{'Planned End Date'}"
+          set-min-date="{start_date}"
+          date="{end_date}"
+          tabindex="{21}"
           />
         <label>
       </div>
@@ -134,15 +134,15 @@
         <div class="row-fluid">
           <div class="span6">
             <datepicker
-              set-max-date="report_end_date"
-              date="report_start_date"
-              tabindex="22"
+              set-max-date="{report_end_date}"
+              date="{report_start_date}"
+              tabindex="{22}"
               />
           </div>
           <div class="span6">
             <datepicker
-              set-min-date="report_start_date"
-              date="report_end_date"
+              set-min-date="{report_start_date}"
+              date="{report_end_date}"
               />
           </div>
         </div>
@@ -168,7 +168,7 @@
               Evidence URL
               <i class="fa fa-question-circle" rel="tooltip" title="Web links to other references."></i>
               <a data-id="hide_url_lk" href="javascript://" class="field-hide" tabindex="-1">hide</a>
-              <spinner {toggle}="isDisabled"></spinner>
+              <spinner {toggle}="{isDisabled}"></spinner>
             </label>
           </related-urls>
         </related-documents>

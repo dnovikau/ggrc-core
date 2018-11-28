@@ -43,9 +43,9 @@
       <lazy-openclose>
         {{#show}}
           <div class="tier-content">
-            {{> /static/mustache/base_objects/title.mustache}}
-            {{> /static/mustache/base_objects/description.mustache}}
-            {{> /static/mustache/base_objects/notes.mustache}}
+            {{>/static/mustache/base_objects/title.stache}}
+            {{>/static/mustache/base_objects/description.stache}}
+            {{>/static/mustache/base_objects/notes.stache}}
           </div>
         {{/show}}
       </lazy-openclose>

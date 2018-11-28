@@ -3,7 +3,7 @@
     Licensed under http://www.apache.org/licenses/LICENSE-2.0 <see LICENSE file>
 }}
 <form action="javascript://">
-  {{> /static/mustache/base_objects/form_restore.mustache}}
+  {{>/static/mustache/base_objects/form_restore.stache}}
 
   <div class="row-fluid">
     <div class="span8">
@@ -126,7 +126,7 @@
     </div>
   </div>
 
-  {{> /static/mustache/partials/modal-ajax-test-plan.mustache}}
+  {{>/static/mustache/partials/modal-ajax-test-plan.stache}}
 
   <div class="row-fluid">
     <div data-id="code_hidden" class="span4 hidable">
@@ -145,9 +145,9 @@
         <i class="fa fa-question-circle" rel="tooltip" title="Indicates the status of this object."></i>
         <a data-id="hide_state_lk" href="javascript://" class="field-hide" tabindex="-1">hide</a>
       </label>
-        <dropdown options-list="model.statuses"
-                  name="instance.status"
-                  tabindex="9">
+        <dropdown options-list="{model.statuses}"
+                  name="{instance.status}"
+                  tabindex="{9}">
         </dropdown>
     </div>
   </div>

@@ -23,7 +23,7 @@
     {{/if}}
     {{#if canEdit}}
       <workflow-activate {instance}="{instance}">
-        <spinner toggle="waiting"></spinner>
+        <spinner toggle="{waiting}"></spinner>
 
         {{^if waiting}}
           {{#if_equals instance.status "Draft"}}
@@ -31,7 +31,7 @@
               type="submit"
               href="#workflowActivate"
               class="btn btn-lightBlue btn-small"
-              ($click)="activateWorkflow"
+              ($click)="{activateWorkflow}"
               {{^if instance.can_start_cycle}}disabled="disabled"{{/if}}>
               Activate Workflow
             </button>

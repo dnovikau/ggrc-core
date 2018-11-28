@@ -28,9 +28,9 @@
         <span class="required">*</span>
         <i class="fa fa-question-circle" rel="tooltip" title="Choose the type of attribute to create."></i>
       </label>
-        <dropdown options-list="model.attributeTypes"
-                  name="instance.attribute_type"
-                  data-purpose="ca-type">
+        <dropdown options-list="{model.attributeTypes}"
+                  name="{instance.attribute_type}"
+                  data-purpose="{ca-type}">
         </dropdown>
     </div>
     <div class="span2">

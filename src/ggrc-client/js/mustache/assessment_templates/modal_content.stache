@@ -6,7 +6,7 @@
 <div class="hideable-holder">
   <wrapper-assessment-template instance='{instance}'>
   <form action="javascript://">
-    {{> /static/mustache/base_objects/form_restore.mustache}}
+    {{>/static/mustache/base_objects/form_restore.stache}}
 
     <div class="row-fluid choose-object">
       <div class="span12">
@@ -65,7 +65,7 @@
       <div class="span6">
         <label>Audit</label>
         {{#using audit=instance.audit }}
-          <input tabindex="2" class="input-block-level" name="audit.title" data-permission-type="update" data-lookup="Audit" data-template="/directives/autocomplete_result.mustache" placeholder="Choose Audit" type="text" null-if-empty="false" value="{{firstnonempty audit.title ''}}" disabled="disabled" />
+          <input tabindex="2" class="input-block-level" name="audit.title" data-permission-type="update" data-lookup="Audit" data-template="/directives/autocomplete_result.stache" placeholder="Choose Audit" type="text" null-if-empty="false" value="{{firstnonempty audit.title ''}}" disabled="disabled" />
         {{/using}}
       </div>
       <div class="span6">
@@ -138,9 +138,9 @@
           <a href="javascript://" class="field-hide" tabindex="-1">hide</a>
         </label>
           <dropdown data-test-id="new_program_dropdown_state_036a1fa6"
-                    options-list="model.statuses"
-                    name="instance.status"
-                    tabindex="23">
+                    options-list="{model.statuses}"
+                    name="{instance.status}"
+                    tabindex="{23}">
           </dropdown>
       </div>
     </div>

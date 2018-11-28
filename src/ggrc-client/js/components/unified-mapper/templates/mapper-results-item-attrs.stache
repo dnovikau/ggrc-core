@@ -21,7 +21,7 @@
 
         {{#case 'default'}}
           {{#instance}}
-            {{> attrTemplate}}
+            {{>attrTemplate}}
           {{/instance}}
         {{/case}}
       {{/switch}}

@@ -7,7 +7,7 @@
 <div class="hideable-holder">
 {{#instance}}
 <form action="javascript://">
-  {{> /static/mustache/base_objects/form_restore.mustache}}
+  {{>/static/mustache/base_objects/form_restore.stache}}
 
   <div class="row-fluid">
     <div class="span6 {{#instance.computed_errors.title}}field-failure{{/instance.computed_errors.title}}">
@@ -51,7 +51,7 @@
     </div>
   </div>
 
-  {{> /static/mustache/partials/modal-ajax-test-plan.mustache}}
+  {{>/static/mustache/partials/modal-ajax-test-plan.stache}}
 
   <div class="row-fluid">
     <div class="span6 {{#instance.computed_errors.risk_type}}field-failure{{/instance.computed_errors.risk_type}}">
@@ -156,7 +156,7 @@
     {{^if isProposal}}
       <div class="span6 hide-wrap hidable">
         <div class="row-fluid inner-hide">
-          {{> '/static/mustache/base_objects/modal-content-reference-urls.mustache'}}
+          {{>/static/mustache/base_objects/modal-content-reference-urls.stache}}
         </div>
       </div>
     {{/if}}
@@ -196,11 +196,11 @@
            title="Indicates the status of this object."></i>
         <a href="javascript://" class="field-hide" tabindex="-1">hide</a>
       </label>
-        <dropdown options-list="model.statuses"
-                  no-value="true"
-                  no-value-label="---"
-                  name="instance.status"
-                  tabindex="23">
+        <dropdown options-list="{model.statuses}"
+                  no-value="{true}"
+                  no-value-label="{---}"
+                  name="{instance.status}"
+                  tabindex="{23}">
         </dropdown>
     </div>
   </div>

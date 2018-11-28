@@ -31,10 +31,9 @@
 	    class="input-medium"
             {instance}="{instance}"
             {(assessment-type)}="{instance.assessment_type}">
-            <dropdown
-              {options-groups}="objectTypes"
-              is-grouped-dropdown="true"
-              name="assessmentType">
+            <dropdown {options-groups}="{objectTypes}"
+                      is-grouped-dropdown="{true}"
+                      name="{assessmentType}">
             </dropdown>
           </assessment-object-type-dropdown>
         </div>
@@ -219,7 +218,7 @@
           </a>
         </div>
         <div class="hidden-fields-area">
-          {{>'/static/mustache/assessments/modal_content_additional_fields.mustache'}}
+          {{>/static/mustache/assessments/modal_content_additional_fields.stache}}
         </div>
       </div>
 

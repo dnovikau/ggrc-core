@@ -7,7 +7,7 @@
 <div class="hideable-holder">
 {{#instance}}
 <form action="javascript://">
-  {{> /static/mustache/base_objects/form_restore.mustache}}
+  {{>/static/mustache/base_objects/form_restore.stache}}
 
   <div class="row-fluid">
     <div class="span6 {{#instance.computed_errors.title}}field-failure{{/instance.computed_errors.title}}">
@@ -47,7 +47,7 @@
         <i class="fa fa-question-circle" rel="tooltip" title="Provide an assessment procedure for this {{model.model_singular}}."></i>
         <a data-id="hide_description_lk" href="javascript://" class="field-hide" tabindex="-1">hide</a>
       </label>
-      <div class="rich-text data-test-id="control_test_plan-text_d8b5a2f4"">
+      <div class="rich-text" data-test-id="control_test_plan-text_d8b5a2f4">
           <rich-text
             tabindex="{2}"
             {hidden-toolbar}="{true}"
@@ -87,7 +87,7 @@
     {{^if isProposal}}
       <div class="span6 hide-wrap hidable">
         <div class="row-fluid inner-hide">
-          {{> '/static/mustache/base_objects/modal-content-reference-urls.mustache'}}
+          {{>/static/mustache/base_objects/modal-content-reference-urls.stache}}
         </div>
       </div>
     {{/if}}
@@ -222,9 +222,9 @@
           <a data-id="hide_state_lk" href="javascript://" class="field-hide" tabindex="-1">hide</a>
         </label>
 
-          <dropdown options-list="model.statuses"
-                    name="instance.status"
-                    tab-index="14">
+          <dropdown options-list="{model.statuses}"
+                    name="{instance.status}"
+                    tab-index="{14}">
           </dropdown>
 
       </div>
