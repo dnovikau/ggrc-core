@@ -64,7 +64,7 @@ export default Cacheable('CMS.Models.Person', {
     return result;
   },
   tree_view_options: {
-    attr_view: GGRC.mustache_path + '/people/tree-item-attr.mustache',
+    attr_view: GGRC.stache_path + '/people/tree-item-attr.stache',
     attr_list: [{
       attr_title: 'Name',
       attr_name: 'title',

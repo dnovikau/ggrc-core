@@ -4,7 +4,7 @@
 */
 
 import '../release-notes-modal/release-notes-modal';
-import template from './release-notes-menu-item.mustache';
+import template from './release-notes-menu-item.stache';
 import {loadUserProfile, updateUserProfile} from '../../plugins/utils/user-utils';
 import {getFormattedUtcDate} from '../../plugins/utils/date-utils';
 

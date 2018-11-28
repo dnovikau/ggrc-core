@@ -3,7 +3,7 @@
   Licensed under http://www.apache.org/licenses/LICENSE-2.0 <see LICENSE file>
 */
 
-describe('can.mustache.helper.validation_error', function () {
+describe('can.stache.helper.validation_error', function () {
   'use strict';
 
   let helper;

@@ -7,7 +7,7 @@ import '../../info-pin-buttons/info-pin-buttons';
 import '../taskgroup_clone';
 import '../task-list/task-list';
 
-import template from './templates/task-group.mustache';
+import template from './templates/task-group.stache';
 
 const viewModel = can.Map.extend({
   instance: null,

@@ -25,11 +25,11 @@ import UserRole from '../models/join-models/user-role';
 const userRolesModalSelector = can.Control.extend({
   defaults: {
     base_modal_view:
-      GGRC.mustache_path + '/people_roles/base_modal.mustache',
+      GGRC.stache_path + '/people_roles/base_modal.stache',
     option_column_view:
-      GGRC.mustache_path + '/people_roles/option_column.mustache',
+      GGRC.stache_path + '/people_roles/option_column.stache',
     object_detail_view:
-      GGRC.mustache_path + '/people_roles/object_detail.mustache',
+      GGRC.stache_path + '/people_roles/object_detail.stache',
 
     option_model: Role,
     object_model: Person,

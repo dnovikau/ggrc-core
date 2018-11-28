@@ -3,7 +3,7 @@
  Licensed under http://www.apache.org/licenses/LICENSE-2.0 <see LICENSE file>
  */
 
-describe('can.mustache.helper.localize_date_today', function () {
+describe('can.stache.helper.localize_date_today', function () {
   'use strict';
 
   let helper;

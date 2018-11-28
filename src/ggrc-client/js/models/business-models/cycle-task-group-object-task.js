@@ -16,7 +16,7 @@ import caUpdate from '../mixins/ca-update';
 import cycleTaskNotifications from '../mixins/cycle-task-notifications';
 import Stub from '../stub';
 
-const _mustachePath = GGRC.mustache_path + '/cycle_task_group_object_tasks';
+const _mustachePath = GGRC.stache_path + '/cycle_task_group_object_tasks';
 
 function populateFromWorkflow(form, workflow) {
   if (!workflow || typeof workflow === 'string') {
@@ -102,12 +102,12 @@ export default Cacheable('CMS.Models.CycleTaskGroupObjectTask', {
   info_pane_options: {
     mapped_objects: {
       mapping: 'info_related_objects',
-      show_view: GGRC.mustache_path + '/base_templates/subtree.mustache',
+      show_view: GGRC.stache_path + '/base_templates/subtree.stache',
     },
   },
   tree_view_options: {
-    add_item_view: _mustachePath + '/tree_add_item.mustache',
-    attr_view: _mustachePath + '/tree-item-attr.mustache',
+    add_item_view: _mustachePath + '/tree_add_item.stache',
+    attr_view: _mustachePath + '/tree-item-attr.stache',
     attr_list: [
       {
         attr_title: 'Task Title',

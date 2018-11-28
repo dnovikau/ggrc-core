@@ -12,8 +12,8 @@ export default can.Component.extend({
   template: '<content/>',
   scope: {
     initial_wf_size: 5,
-    workflow_view: GGRC.mustache_path +
-      '/dashboard/info/workflow_progress.mustache',
+    workflow_view: GGRC.stache_path +
+      '/dashboard/info/workflow_progress.stache',
     workflow_data: {},
     workflow_count: 0,
     workflow_show_all: false,

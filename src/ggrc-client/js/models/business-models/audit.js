@@ -50,8 +50,8 @@ export default Cacheable('CMS.Models.Audit', {
       'Issues', 'Assessments', 'Evidence'],
   },
   tree_view_options: {
-    attr_view: GGRC.mustache_path + '/audits/tree-item-attr.mustache',
-    add_item_view: GGRC.mustache_path + '/audits/tree_add_item.mustache',
+    attr_view: GGRC.stache_path + '/audits/tree-item-attr.stache',
+    add_item_view: GGRC.stache_path + '/audits/tree_add_item.stache',
     attr_list: [{
       attr_title: 'Title',
       attr_name: 'title',

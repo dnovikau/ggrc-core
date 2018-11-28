@@ -37,7 +37,7 @@ export default Cacheable('CMS.Models.Product', {
     kind: Stub,
   },
   tree_view_options: {
-    attr_view: GGRC.mustache_path + '/base_objects/tree-item-attr.mustache',
+    attr_view: GGRC.stache_path + '/base_objects/tree-item-attr.stache',
     attr_list: Cacheable.attr_list.concat([
       {attr_title: 'Kind/Type', attr_name: 'type', attr_sort_field: 'kind'},
       {attr_title: 'Reference URL', attr_name: 'reference_url'},

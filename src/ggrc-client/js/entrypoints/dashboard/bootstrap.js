@@ -67,7 +67,7 @@ $area.cms_controllers_page_object(can.extend({
   widget_descriptors: widgetList,
   default_widgets: defaults || [],
   instance: getPageInstance(),
-  header_view: GGRC.mustache_path + '/base_objects/page_header.mustache',
+  header_view: GGRC.stache_path + '/base_objects/page_header.stache',
   GGRC: GGRC, // make the global object available in Mustache templates
   page_title: function (controller) {
     return controller.options.instance.title;

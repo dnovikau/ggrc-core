@@ -6,7 +6,7 @@
 import './comment-input';
 import './comment-add-button';
 import Permission from '../../permission';
-import template from './comment-add-form.mustache';
+import template from './comment-add-form.stache';
 import {COMMENT_CREATED} from '../../events/eventTypes';
 import tracker from '../../tracker';
 import {getAssigneeType} from '../../plugins/ggrc_utils';

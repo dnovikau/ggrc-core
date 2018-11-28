@@ -38,7 +38,7 @@ import {
 let mustacheUrls = {};
 let Mustache = can.Mustache;
 $.ajaxPrefilter(function (options, originalOptions, jqXHR) {
-  if (/\.mustache$/.test(options.url)) {
+  if (/\.stache$/.test(options.url)) {
     if (mustacheUrls[options.url]) {
       options.url = mustacheUrls[options.url];
     } else {
@@ -49,7 +49,7 @@ $.ajaxPrefilter(function (options, originalOptions, jqXHR) {
 
 function getTemplatePath(url) {
   let match;
-  match = url.match(/\/static\/(mustache|mockups)\/(.*)\.mustache/);
+  match = url.match(/\/static\/(mustache|mockups)\/(.*)\.stache/);
   return match && match[2];
 }
 

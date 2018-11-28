@@ -9,11 +9,11 @@ export default ModalsController({
   pluginName: 'ggrc_controllers_gapi_modal',
   defaults: {
     skip_refresh: true,
-    content_view: GGRC.mustache_path + '/gdrive/auth_button.mustache',
+    content_view: GGRC.stache_path + '/gdrive/auth_button.stache',
   },
   init: function () {
     this._super(...arguments);
-    this.defaults.button_view = can.view.mustache('');
+    this.defaults.button_view = can.view.stache('');
   },
 }, {
   init: function () {

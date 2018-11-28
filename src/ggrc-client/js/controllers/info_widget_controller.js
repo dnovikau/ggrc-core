@@ -22,14 +22,14 @@ export default can.Control({
   defaults: {
     model: getPageModel(),
     instance: getPageInstance(),
-    widget_view: GGRC.mustache_path + '/base_objects/info.mustache',
+    widget_view: GGRC.stache_path + '/base_objects/info.stache',
   },
 }, {
   init: function () {
     this.init_menu();
 
     if (this.element.data('widget-view')) {
-      this.options.widget_view = GGRC.mustache_path +
+      this.options.widget_view = GGRC.stache_path +
         this.element.data('widget-view');
     }
     if (this.options.instance.info_pane_preload) {
@@ -57,7 +57,7 @@ export default can.Control({
     let widgetView = $(el)
       .closest('[data-widget-view]').attr('data-widget-view');
     if (widgetView && widgetView.length > 0) {
-      return GGRC.mustache_path + widgetView;
+      return GGRC.stache_path + widgetView;
     }
     return this.options.widget_view;
   },

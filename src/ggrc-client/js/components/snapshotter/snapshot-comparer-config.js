@@ -20,6 +20,6 @@ export default can.Component.extend({
     rightRevisions: [],
     modalTitle: 'Compare with the latest version',
     modalConfirm: 'Update',
-    buttonView: `${GGRC.mustache_path}/modals/prompt_buttons.mustache`,
+    buttonView: `${GGRC.stache_path}/modals/prompt_buttons.stache`,
   },
 });

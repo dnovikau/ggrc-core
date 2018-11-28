@@ -7,11 +7,11 @@ import '../lazy-render/lazy-render';
 import '../cycle-task-actions/cycle-task-actions';
 import './tree-item-custom-attribute';
 import BaseTreeItemVM from './tree-item-base-vm';
-import template from './templates/tree-item.mustache';
+import template from './templates/tree-item.stache';
 import * as businessModels from '../../models/business-models';
 
 const DEFAULT_ATTR_TEMPLATE =
-  GGRC.mustache_path + '/base_objects/tree-item-attr.mustache';
+  GGRC.stache_path + '/base_objects/tree-item-attr.stache';
 
 let viewModel = BaseTreeItemVM.extend({
   define: {

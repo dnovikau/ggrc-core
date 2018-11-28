@@ -8,7 +8,7 @@ import {
   buildParam,
   batchRequests,
 } from '../../plugins/utils/query-api-utils';
-import template from './assessment_templates.mustache';
+import template from './assessment_templates.stache';
 import tracker from '../../tracker';
 
 export default can.Component.extend({

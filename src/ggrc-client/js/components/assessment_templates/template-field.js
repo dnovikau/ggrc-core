@@ -7,7 +7,7 @@ import {
   ddValidationValueToMap,
   ddValidationMapToValue,
 } from '../../plugins/utils/ca-utils';
-import template from './templates/attribute_field.mustache';
+import template from './templates/attribute_field.stache';
 
 /*
  * Template field

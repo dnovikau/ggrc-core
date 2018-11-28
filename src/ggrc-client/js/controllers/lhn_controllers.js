@@ -356,8 +356,8 @@ can.Control.extend({
 can.Control.extend({
   pluginName: 'cms_controllers_lhn_search',
   defaults: {
-    list_view: GGRC.mustache_path + '/base_objects/search_result.mustache',
-    actions_view: GGRC.mustache_path + '/base_objects/search_actions.mustache',
+    list_view: GGRC.stache_path + '/base_objects/search_result.stache',
+    actions_view: GGRC.stache_path + '/base_objects/search_actions.stache',
     list_selector: 'ul.top-level > li, ul.mid-level > li',
     list_toggle_selector: 'li > a.list-toggle',
     model_attr_selector: null,
@@ -374,7 +374,7 @@ can.Control.extend({
   },
 }, {
   display: function () {
-    let templatePath = GGRC.mustache_path + this.element.data('template');
+    let templatePath = GGRC.stache_path + this.element.data('template');
     let lhnPrefs = getLHNState();
 
     // 2-way binding is set up in the view using can-value, directly connecting the

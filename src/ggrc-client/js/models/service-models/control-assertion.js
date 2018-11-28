@@ -11,7 +11,7 @@ export default Cacheable('CMS.Models.ControlAssertion', {
   findAll: 'GET /api/control_assertions',
   findOne: 'GET /api/control_assertions/{id}',
   tree_view_options: {
-    show_view: '/static/mustache/controls/categories_tree.mustache',
+    show_view: '/static/mustache/controls/categories_tree.stache',
     start_expanded: false,
   },
 }, {});

@@ -12,7 +12,7 @@ describe('mapper-results-item-attrs component', function () {
 
   let viewModel;
   let DEFAULT_ATTR_TEMPLATE =
-    GGRC.mustache_path + '/base_objects/tree-item-attr.mustache';
+    GGRC.stache_path + '/base_objects/tree-item-attr.stache';
 
   beforeEach(function () {
     let init = Component.prototype.viewModel.init;
@@ -30,7 +30,7 @@ describe('mapper-results-item-attrs component', function () {
       viewModel.init();
       result = viewModel.attr('attrTemplate');
       expect(result)
-        .toEqual(GGRC.mustache_path + '/controls/tree-item-attr.mustache');
+        .toEqual(GGRC.stache_path + '/controls/tree-item-attr.stache');
     });
 
     it('sets default mustache template path in viewModel.attrTemplate' +

@@ -64,7 +64,7 @@ can.Control.extend({
 can.Control.extend({
   pluginName: 'cms_controllers_lhn_tooltips',
   defaults: {
-    tooltip_view: GGRC.mustache_path + '/base_objects/extended_info.mustache',
+    tooltip_view: GGRC.stache_path + '/base_objects/extended_info.stache',
     trigger_selector: '.show-extended',
     fade_in_delay: 300,
     fade_out_delay: 300,
@@ -138,7 +138,7 @@ can.Control.extend({
       if (tooltipView === 'null') {
         path = null;
       } else {
-        path = GGRC.mustache_path + tooltipView;
+        path = GGRC.stache_path + tooltipView;
       }
     } else {
       path = this.options.tooltip_view;

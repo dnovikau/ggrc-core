@@ -210,8 +210,8 @@ import {changeUrl} from '../router';
             modal_description: 'Are you sure that you want' +
             ' to discard your changes?',
             modal_confirm: 'Continue Editing',
-            button_view: GGRC.mustache_path +
-              '/modals/discard_buttons.mustache',
+            button_view: GGRC.stache_path +
+              '/modals/discard_buttons.stache',
             skip_refresh: true,
           }, function () {
             can.trigger(instance, 'modal:dismiss');

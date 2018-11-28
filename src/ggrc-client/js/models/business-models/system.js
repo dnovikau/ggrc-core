@@ -42,7 +42,7 @@ export default Cacheable('CMS.Models.System', {
     status: 'Draft',
   },
   tree_view_options: {
-    attr_view: GGRC.mustache_path + '/base_objects/tree-item-attr.mustache',
+    attr_view: GGRC.stache_path + '/base_objects/tree-item-attr.stache',
     attr_list: can.Model.Cacheable.attr_list.concat([
       {
         attr_title: 'Network Zone',

@@ -21,8 +21,8 @@ import WidgetList from '../../modules/widget_list';
 import ListView from '../../controllers/tree/list_view_controller';
 import TreeView from '../../controllers/tree/tree-view';
 
-const path = GGRC.mustache_path || '/static/mustache';
-const HEADER_VIEW = `${path}/base_objects/page_header.mustache`;
+const path = GGRC.stache_path || '/static/mustache';
+const HEADER_VIEW = `${path}/base_objects/page_header.stache`;
 
 const $area = $('.area').first();
 const sortByNameEmail = (list) => {
@@ -57,11 +57,11 @@ const adminListDescriptors = {
         });
     },
     object_display: 'People',
-    tooltip_view: '/static/mustache/people/object_tooltip.mustache',
+    tooltip_view: '/static/mustache/people/object_tooltip.stache',
     header_view:
     // includes only the filter, not the column headers
-      '/static/mustache/people/filters.mustache',
-    list_view: '/static/mustache/people/object_list.mustache',
+      '/static/mustache/people/filters.stache',
+    list_view: '/static/mustache/people/object_list.stache',
     fetch_post_process: sortByNameEmail,
   },
   roles: {
@@ -69,23 +69,23 @@ const adminListDescriptors = {
     extra_params: {scope__in: 'System,Admin,Private Program,Workflow'},
     object_category: 'governance',
     object_display: 'Roles',
-    list_view: '/static/mustache/roles/object_list.mustache',
+    list_view: '/static/mustache/roles/object_list.stache',
     fetch_post_process: sortByNameEmail,
   },
   events: {
     model: Event,
     object_category: 'governance',
     object_display: 'Events',
-    list_view: '/static/mustache/events/object_list.mustache',
+    list_view: '/static/mustache/events/object_list.stache',
   },
   custom_attributes: {
     parent_instance: CustomAttributable,
     model: CustomAttributable,
     header_view:
-    GGRC.mustache_path +
-    '/custom_attribute_definitions/tree_header.mustache',
+    GGRC.stache_path +
+    '/custom_attribute_definitions/tree_header.stache',
     show_view:
-    GGRC.mustache_path + '/custom_attribute_definitions/tree.mustache',
+    GGRC.stache_path + '/custom_attribute_definitions/tree.stache',
     sortable: false,
     list_loader: function () {
       return CustomAttributable.findAll();
@@ -94,8 +94,8 @@ const adminListDescriptors = {
       model: CustomAttributeDefinition,
       mapping: 'custom_attribute_definitions',
       show_view:
-      GGRC.mustache_path +
-      '/custom_attribute_definitions/subtree.mustache',
+      GGRC.stache_path +
+      '/custom_attribute_definitions/subtree.stache',
       add_item_view: null,
     }],
   },
@@ -103,9 +103,9 @@ const adminListDescriptors = {
     parent_instance: Roleable,
     model: Roleable,
     header_view:
-    GGRC.mustache_path + '/access_control_roles/tree_header.mustache',
+    GGRC.stache_path + '/access_control_roles/tree_header.stache',
     show_view:
-    GGRC.mustache_path + '/access_control_roles/tree.mustache',
+    GGRC.stache_path + '/access_control_roles/tree.stache',
     sortable: false,
     list_loader: function () {
       return Roleable.findAll();
@@ -114,7 +114,7 @@ const adminListDescriptors = {
       model: AccessControlRole,
       mapping: 'access_control_roles',
       show_view:
-      GGRC.mustache_path + '/access_control_roles/subtree.mustache',
+      GGRC.stache_path + '/access_control_roles/subtree.stache',
       add_item_view: null,
     }],
   },

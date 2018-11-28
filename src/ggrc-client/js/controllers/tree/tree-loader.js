@@ -32,7 +32,7 @@ export default can.Control.extend({
         '>',
         '</spinner>',
       ].join('');
-      renderer = can.view.mustache(spinner);
+      renderer = can.view.stache(spinner);
       spinner = renderer({showMe: true});
 
       // Admin dashboard

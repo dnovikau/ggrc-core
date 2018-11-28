@@ -8,6 +8,6 @@ import {gapiClient} from '../../plugins/ggrc-gapi-client';
 
 gapiClient.loadGapiClient();
 
-$('#csv_import').html(can.view.mustache('<csv-import/>'));
-$('#page-header').html(can.view.mustache('<page-header/>'));
+$('#csv_import').html(can.view.stache('<csv-import/>'));
+$('#page-header').html(can.view.stache('<page-header/>'));
 initWidgets();

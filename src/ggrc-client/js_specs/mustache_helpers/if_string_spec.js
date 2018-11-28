@@ -3,7 +3,7 @@
   Licensed under http://www.apache.org/licenses/LICENSE-2.0 <see LICENSE file>
 */
 
-describe('can.mustache.helper.if_string', function () {
+describe('can.stache.helper.if_string', function () {
   'use strict';
 
   let fakeOptions; // fake mustache options object passed to the helper

@@ -51,7 +51,7 @@ export default Cacheable('CMS.Models.Control', {
     status: 'Draft',
   },
   tree_view_options: {
-    attr_view: GGRC.mustache_path + '/controls/tree-item-attr.mustache',
+    attr_view: GGRC.stache_path + '/controls/tree-item-attr.stache',
     attr_list: Cacheable.attr_list.concat([
       {
         attr_title: 'Last Assessment Date',

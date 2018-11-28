@@ -20,7 +20,7 @@ describe('TreeViewNode Controller', function () {
 
       ctrlInst = {
         options: new can.Map({
-          show_view: '/foo/bar.mustache',
+          show_view: '/foo/bar.stache',
         }),
         element: $element,
         _draw_node_in_progress: false,
@@ -51,7 +51,7 @@ describe('TreeViewNode Controller', function () {
         method();
 
         expect(can.view).toHaveBeenCalledWith(
-          '/foo/bar.mustache',
+          '/foo/bar.stache',
           ctrlInst.options,
           ifNotRemovedResult
         );
@@ -80,7 +80,7 @@ describe('TreeViewNode Controller', function () {
       method();
 
       expect(can.view).toHaveBeenCalledWith(
-        '/foo/bar.mustache',
+        '/foo/bar.stache',
         ctrlInst.options,
         ifNotRemovedResult
       );
@@ -117,7 +117,7 @@ describe('TreeViewNode Controller', function () {
       ctrlInst = {
         element: $tree,
         options: new can.Map({
-          show_view: '/foo/bar.mustache',
+          show_view: '/foo/bar.stache',
         }),
         _ifNotRemoved: jasmine.createSpy().and.callFake(function (callback) {
           return callback;

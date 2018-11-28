@@ -39,7 +39,7 @@ export const pinContentMinimizedClass = 'pin-content--minimized';
 export default can.Control({
   pluginName: 'cms_controllers_info_pin',
   defaults: {
-    view: GGRC.mustache_path + '/base_objects/info.mustache',
+    view: GGRC.stache_path + '/base_objects/info.stache',
   },
 }, {
   init: function (el, options) {
@@ -162,12 +162,12 @@ export default can.Control({
   },
   confirmEdit: function (instance, modalDetails) {
     let confirmDfd = $.Deferred();
-    let renderer = can.view.mustache(modalDetails.description);
+    let renderer = can.view.stache(modalDetails.description);
     confirm({
       modal_description: renderer(instance).textContent,
       modal_confirm: modalDetails.button,
       modal_title: modalDetails.title,
-      button_view: GGRC.mustache_path + '/quick_form/confirm_buttons.mustache',
+      button_view: GGRC.stache_path + '/quick_form/confirm_buttons.stache',
     }, confirmDfd.resolve);
     return confirmDfd;
   },

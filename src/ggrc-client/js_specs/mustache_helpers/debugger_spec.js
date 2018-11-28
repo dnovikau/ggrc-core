@@ -3,7 +3,7 @@
   Licensed under http://www.apache.org/licenses/LICENSE-2.0 <see LICENSE file>
 */
 
-describe('can.mustache.helper.debugger', function () {
+describe('can.stache.helper.debugger', function () {
   let fakeOptions;
   let helper;
 

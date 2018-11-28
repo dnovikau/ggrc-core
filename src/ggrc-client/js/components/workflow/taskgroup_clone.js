@@ -40,7 +40,7 @@ export default can.Component.extend({
       import(/* webpackChunkName: "modalsCtrls" */'../../controllers/modals')
         .then(() => {
           const contentView =
-            `${GGRC.mustache_path}/task_groups/clone_modal_content.mustache`;
+            `${GGRC.stache_path}/task_groups/clone_modal_content.stache`;
           $target.ggrc_controllers_modals({
             modal_title: 'Clone Task Group',
             model: CloneTaskGroup,

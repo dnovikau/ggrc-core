@@ -34,8 +34,8 @@ export default Cacheable('CMS.Models.TaskGroup', {
   },
 
   tree_view_options: {
-    attr_view: GGRC.mustache_path + '/task_groups/tree-item-attr.mustache',
-    add_item_view: GGRC.mustache_path + '/task_groups/tree_add_item.mustache',
+    attr_view: GGRC.stache_path + '/task_groups/tree-item-attr.stache',
+    add_item_view: GGRC.stache_path + '/task_groups/tree_add_item.stache',
     mapper_attr_list: [
       {attr_title: 'Summary', attr_name: 'title'},
       {attr_title: 'Assignee', attr_name: 'assignee',

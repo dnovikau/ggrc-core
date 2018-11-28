@@ -152,8 +152,8 @@ describe('"getInstanceView" method', () => {
   let originalMustachePath;
 
   beforeAll(() => {
-    originalMustachePath = GGRC.mustache_path;
-    GGRC.mustache_path = 'superdir/dir';
+    originalMustachePath = GGRC.stache_path;
+    GGRC.stache_path = 'superdir/dir';
 
     originalTemplates = GGRC.Templates;
     GGRC.Templates = {
@@ -164,7 +164,7 @@ describe('"getInstanceView" method', () => {
 
   afterAll(() => {
     GGRC.Templates = originalTemplates;
-    GGRC.mustache_path = originalMustachePath;
+    GGRC.stache_path = originalMustachePath;
   });
 
   it('should return empty string. instance is undefined', () => {
@@ -175,7 +175,7 @@ describe('"getInstanceView" method', () => {
   });
 
   it('should return default "view" path', () => {
-    const expectedPath = `${GGRC.mustache_path}/base_objects/info.mustache`;
+    const expectedPath = `${GGRC.stache_path}/base_objects/info.stache`;
 
     // "GGRC.Templates" const doesn't contain template for Vendor
     const instance = makeFakeInstance({model: Vendor})();
@@ -185,7 +185,7 @@ describe('"getInstanceView" method', () => {
   });
 
   it('should return object "view" path', () => {
-    const expectedPath = `${GGRC.mustache_path}/risks/info.mustache`;
+    const expectedPath = `${GGRC.stache_path}/risks/info.stache`;
 
     // "GGRC.Templates" const contains template for Risk
     const instance = makeFakeInstance({model: Risk})();

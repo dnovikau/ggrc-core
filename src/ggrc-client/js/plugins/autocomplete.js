@@ -236,9 +236,9 @@ import * as businessModels from '../models/business-models';
           model &&
           GGRC.Templates[model.table_plural + '/autocomplete_result']
         ) {
-          template = '/' + model.table_plural + '/autocomplete_result.mustache';
+          template = '/' + model.table_plural + '/autocomplete_result.stache';
         } else {
-          template = '/base_objects/autocomplete_result.mustache';
+          template = '/base_objects/autocomplete_result.stache';
         }
       }
 
@@ -282,7 +282,7 @@ import * as businessModels from '../models/business-models';
         /* webpackChunkName: "infiniteScroll" */
         '../controllers/infinite-scroll-controller'
       ).then(() => {
-        can.view.render(GGRC.mustache_path + template,
+        can.view.render(GGRC.stache_path + template,
           context, function (frag) {
             $ul.html(frag);
             $ul.cms_controllers_lhn_tooltips()

@@ -34,7 +34,7 @@ export default Cacheable('CMS.Models.TechnologyEnvironment', {
     modified_by: Stub,
   },
   tree_view_options: {
-    attr_view: GGRC.mustache_path + '/base_objects/tree-item-attr.mustache',
+    attr_view: GGRC.stache_path + '/base_objects/tree-item-attr.stache',
     attr_list: Cacheable.attr_list.concat([
       {attr_title: 'Effective Date', attr_name: 'start_date'},
       {attr_title: 'Last Deprecated Date', attr_name: 'end_date'},

@@ -54,7 +54,7 @@ export default Cacheable('CMS.Models.Document', {
     recipients: 'Admin',
   },
   tree_view_options: {
-    attr_view: GGRC.mustache_path + '/documents/tree-item-attr.mustache',
+    attr_view: GGRC.stache_path + '/documents/tree-item-attr.stache',
     display_attr_names: ['title', 'status', 'updated_at', 'document_type'],
     attr_list: [
       {attr_title: 'Title', attr_name: 'title'},

@@ -6,10 +6,10 @@
 import '../tree/tree-item-custom-attribute';
 import '../tree/tree-field';
 import * as businessModels from '../../models/business-models';
-import template from './templates/mapper-results-item-attrs.mustache';
+import template from './templates/mapper-results-item-attrs.stache';
 
 const DEFAULT_ATTR_TEMPLATE =
-  '/static/mustache/base_objects/tree-item-attr.mustache';
+  '/static/mustache/base_objects/tree-item-attr.stache';
 
 export default can.Component.extend({
   tag: 'mapper-results-item-attrs',

@@ -10,7 +10,7 @@ import {
 } from '../../plugins/utils/gdrive-picker-utils.js';
 import {backendGdriveClient} from '../../plugins/ggrc-gapi-client';
 import tracker from '../../tracker';
-import template from './templates/gdrive_file.mustache';
+import template from './templates/gdrive_file.stache';
 import {
   notifier,
   messages,

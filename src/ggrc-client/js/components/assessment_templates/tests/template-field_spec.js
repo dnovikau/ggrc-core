@@ -144,7 +144,7 @@ describe('template-field component', function () {
           callMeOnRemove: onRemoveCallback,
         });
 
-        renderer = can.view.mustache(htmlSnippet);
+        renderer = can.view.stache(htmlSnippet);
         docFragment = renderer(templateContext);
         $body.append(docFragment);
 

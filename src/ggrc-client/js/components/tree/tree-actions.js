@@ -15,7 +15,7 @@ import {
   isSnapshotScope,
 } from '../../plugins/utils/snapshot-utils';
 import Permission from '../../permission';
-import template from './templates/tree-actions.mustache';
+import template from './templates/tree-actions.stache';
 
 export default can.Component.extend({
   tag: 'tree-actions',
@@ -29,7 +29,7 @@ export default can.Component.extend({
             false :
             this.attr('options').add_item_view ||
             this.attr('model').tree_view_options.add_item_view ||
-            GGRC.mustache_path + '/base_objects/tree_add_item.mustache';
+            GGRC.stache_path + '/base_objects/tree_add_item.stache';
         },
       },
       show3bbs: {

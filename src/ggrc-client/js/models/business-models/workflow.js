@@ -44,7 +44,7 @@ export default Cacheable('CMS.Models.Workflow', {
     show_all_tabs: true,
   },
   tree_view_options: {
-    attr_view: GGRC.mustache_path + '/workflows/tree-item-attr.mustache',
+    attr_view: GGRC.stache_path + '/workflows/tree-item-attr.stache',
     attr_list: [
       {attr_title: 'Title', attr_name: 'title'},
       {attr_title: 'Code', attr_name: 'slug'},

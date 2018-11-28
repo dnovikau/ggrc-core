@@ -21,25 +21,25 @@ import * as businessModels from '../models/business-models/index';
 import TreeViewConfig from '../apps/base_widgets';
 
 const summaryWidgetViews = Object.freeze({
-  audits: GGRC.mustache_path + '/audits/summary.mustache',
+  audits: GGRC.stache_path + '/audits/summary.stache',
 });
 
 const infoWidgetViews = Object.freeze({
-  programs: GGRC.mustache_path + '/programs/info.mustache',
-  audits: GGRC.mustache_path + '/audits/info.mustache',
-  people: GGRC.mustache_path + '/people/info.mustache',
-  policies: GGRC.mustache_path + '/policies/info.mustache',
-  controls: GGRC.mustache_path + '/controls/info.mustache',
-  systems: GGRC.mustache_path + '/systems/info.mustache',
-  processes: GGRC.mustache_path + '/processes/info.mustache',
-  products: GGRC.mustache_path + '/products/info.mustache',
-  assessments: GGRC.mustache_path + '/assessments/info.mustache',
+  programs: GGRC.stache_path + '/programs/info.stache',
+  audits: GGRC.stache_path + '/audits/info.stache',
+  people: GGRC.stache_path + '/people/info.stache',
+  policies: GGRC.stache_path + '/policies/info.stache',
+  controls: GGRC.stache_path + '/controls/info.stache',
+  systems: GGRC.stache_path + '/systems/info.stache',
+  processes: GGRC.stache_path + '/processes/info.stache',
+  products: GGRC.stache_path + '/products/info.stache',
+  assessments: GGRC.stache_path + '/assessments/info.stache',
   assessment_templates:
-    GGRC.mustache_path + '/assessment_templates/info.mustache',
-  issues: GGRC.mustache_path + '/issues/info.mustache',
-  evidence: GGRC.mustache_path + '/evidence/info.mustache',
-  documents: GGRC.mustache_path + '/documents/info.mustache',
-  risks: GGRC.mustache_path + '/risks/info.mustache',
+    GGRC.stache_path + '/assessment_templates/info.stache',
+  issues: GGRC.stache_path + '/issues/info.stache',
+  evidence: GGRC.stache_path + '/evidence/info.stache',
+  documents: GGRC.stache_path + '/documents/info.stache',
+  risks: GGRC.stache_path + '/risks/info.stache',
 });
 
 let CoreExtension = {};
@@ -53,7 +53,7 @@ _.assign(CoreExtension, {
     let objectClass = getPageModel();
     let objectTable = objectClass && objectClass.table_plural;
     let object = getPageInstance();
-    let path = GGRC.mustache_path;
+    let path = GGRC.stache_path;
     let modelNames;
     let possibleModelType;
     let farModels;
@@ -72,7 +72,7 @@ _.assign(CoreExtension, {
       widgetList.add_widget(object.constructor.shortName, 'dashboard', {
         content_controller: DashboardWidget,
         instance: object,
-        widget_view: path + '/base_objects/dashboard_widget.mustache',
+        widget_view: path + '/base_objects/dashboard_widget.stache',
       });
     }
     widgetList.add_widget(object.constructor.shortName, 'info', {

@@ -3,7 +3,7 @@
  Licensed under http://www.apache.org/licenses/LICENSE-2.0 <see LICENSE file>
  */
 
-describe('can.mustache.helper.assignee_types', function () {
+describe('can.stache.helper.assignee_types', function () {
   'use strict';
 
   let helper;

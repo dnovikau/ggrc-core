@@ -11,7 +11,7 @@ export default Cacheable('CMS.Models.ControlCategory', {
   findAll: 'GET /api/control_categories',
   findOne: 'GET /api/control_categories/{id}',
   tree_view_options: {
-    show_view: '/static/mustache/controls/categories_tree.mustache',
+    show_view: '/static/mustache/controls/categories_tree.stache',
     start_expanded: false,
   },
 }, {});
