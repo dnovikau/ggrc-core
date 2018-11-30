@@ -77,17 +77,18 @@ const userRolesModalSelector = can.Control.extend({
   },
 
   init_view: function () {
-    let self = this;
     let deferred = $.Deferred();
 
-    can.view(
-      this.options.base_modal_view,
-      this.context,
-      function (frag) {
-        $(self.element).html(frag);
-        deferred.resolve();
-        self.element.trigger('loaded');
-      });
+    $.ajax({
+      url: this.options.base_modal_view,
+      dataType: 'text',
+      async: false,
+    }).then((view) => {
+      let frag = can.stache(view)(this.context);
+      $(this.element).html(frag);
+      deferred.resolve();
+      this.element.trigger('loaded');
+    });
 
     this.on(); // Start listening for events
 

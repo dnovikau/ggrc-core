@@ -36,7 +36,6 @@ import {
 
 // Chrome likes to cache AJAX requests for Mustaches.
 let mustacheUrls = {};
-let Mustache = can.Mustache;
 $.ajaxPrefilter(function (options, originalOptions, jqXHR) {
   if (/\.stache$/.test(options.url)) {
     if (mustacheUrls[options.url]) {
@@ -48,8 +47,7 @@ $.ajaxPrefilter(function (options, originalOptions, jqXHR) {
 });
 
 function getTemplatePath(url) {
-  let match;
-  match = url.match(/\/static\/(mustache|mockups)\/(.*)\.stache/);
+  let match = url.match(/\/static\/(mustache)\/(.*)\.stache/);
   return match && match[2];
 }
 
@@ -93,7 +91,7 @@ $.ajaxTransport('text', function (options, _originalOptions, _jqXHR) {
  * @param  {Object} [options.computeSeparator=''] separator which replaces whitespaces in computed value
  * @return {String} computed class string
  */
-Mustache.registerHelper('addclass', function (prefix, compute, options = {}) {
+can.stache.registerHelper('addclass', function (prefix, compute, options = {}) {
   prefix = resolveComputed(prefix);
   let computeVal = resolveComputed(compute);
   let opts = options.hash || {};
@@ -107,7 +105,7 @@ Mustache.registerHelper('addclass', function (prefix, compute, options = {}) {
   return [prefix, classSegment].join(separator);
 });
 
-Mustache.registerHelper('if_equals', function (val1, val2, options) {
+can.stache.registerHelper('if_equals', function (val1, val2, options) {
   let _val1;
   let _val2;
   function exec() {
@@ -144,7 +142,7 @@ Mustache.registerHelper('if_equals', function (val1, val2, options) {
   return exec();
 });
 
-Mustache.registerHelper('if_match', function (val1, val2, options) {
+can.stache.registerHelper('if_match', function (val1, val2, options) {
   let _val1 = resolveComputed(val1);
   let _val2 = resolveComputed(val2);
   function exec() {
@@ -155,7 +153,7 @@ Mustache.registerHelper('if_match', function (val1, val2, options) {
   return exec();
 });
 
-Mustache.registerHelper('in_array', function (needle, haystack, options) {
+can.stache.registerHelper('in_array', function (needle, haystack, options) {
   needle = resolveComputed(needle);
   haystack = resolveComputed(haystack);
 
@@ -163,7 +161,7 @@ Mustache.registerHelper('in_array', function (needle, haystack, options) {
     'fn' : 'inverse'](options.contexts);
 });
 
-Mustache.registerHelper('if_null', function (val1, options) {
+can.stache.registerHelper('if_null', function (val1, options) {
   let that = this;
   let _val1;
   function exec() {
@@ -200,7 +198,7 @@ Mustache.registerHelper('if_null', function (val1, options) {
    * @param {Object} options - a CanJS options argument passed to every helper
    *
    */
-Mustache.registerHelper('if_string', function (thing, options) {
+can.stache.registerHelper('if_string', function (thing, options) {
   let resolved;
 
   if (arguments.length !== 2) {
@@ -210,7 +208,7 @@ Mustache.registerHelper('if_string', function (thing, options) {
         '), expected 1.');
   }
 
-  resolved = Mustache.resolve(thing);
+  resolved = can.Mustache.resolve(thing);
 
   if (_.isString(resolved)) {
     return options.fn(options.context);
@@ -230,7 +228,7 @@ Mustache.registerHelper('if_string', function (thing, options) {
    *
    * @return {*} - the value of the property object[key]
    */
-Mustache.registerHelper('get_item', function (object, key, options) {
+can.stache.registerHelper('get_item', function (object, key, options) {
   if (arguments.length !== 3) {
     throw new Error(
       'Invalid number of arguments (' +
@@ -238,18 +236,18 @@ Mustache.registerHelper('get_item', function (object, key, options) {
         '), expected 2.');
   }
 
-  object = Mustache.resolve(object);
+  object = can.Mustache.resolve(object);
 
   if (!_.isObject(object)) {
     throw new Error('First argument must be an object.');
   }
 
-  key = Mustache.resolve(key);
+  key = can.Mustache.resolve(key);
   return object[key];
 });
 
 // Resolve and return the first computed value from a list
-Mustache.registerHelper('firstexist', function () {
+can.stache.registerHelper('firstexist', function () {
   let args = can.makeArray(arguments).slice(0, arguments.length - 1); // ignore the last argument (some Can object)
   for (let i = 0; i < args.length; i++) {
     let v = resolveComputed(args[i]);
@@ -261,7 +259,7 @@ Mustache.registerHelper('firstexist', function () {
 });
 
 // Return the first value from a list that computes to a non-empty string
-Mustache.registerHelper('firstnonempty', function () {
+can.stache.registerHelper('firstnonempty', function () {
   let args = can.makeArray(arguments).slice(0, arguments.length - 1); // ignore the last argument (some Can object)
   for (let i = 0; i < args.length; i++) {
     let v = resolveComputed(args[i]);
@@ -271,7 +269,7 @@ Mustache.registerHelper('firstnonempty', function () {
   return '';
 });
 
-Mustache.registerHelper('is_empty', (data, options) => {
+can.stache.registerHelper('is_empty', (data, options) => {
   data = resolveComputed(data);
   const result = can.isEmptyObject(
     can.isPlainObject(data) ? data : data.attr()
@@ -279,7 +277,7 @@ Mustache.registerHelper('is_empty', (data, options) => {
   return options[result ? 'fn' : 'inverse'](options.contexts);
 });
 
-Mustache.registerHelper('pack', function () {
+can.stache.registerHelper('pack', function () {
   let options = arguments[arguments.length - 1];
   let objects = can.makeArray(arguments).slice(0, arguments.length - 1);
   let pack = {};
@@ -310,7 +308,7 @@ Mustache.registerHelper('pack', function () {
 
 // Render a named template with the specified context, serialized and
 // augmented by 'options.hash'
-Mustache.registerHelper('render', function (template, context, options) {
+can.stache.registerHelper('render', function (template, context, options) {
   if (!options) {
     options = context;
     context = this;
@@ -346,7 +344,7 @@ Mustache.registerHelper('render', function (template, context, options) {
 
 // Like 'render', but doesn't serialize the 'context' object, and doesn't
 // apply options.hash
-Mustache.registerHelper('renderLive', function (template, context, options) {
+can.stache.registerHelper('renderLive', function (template, context, options) {
   if (!options) {
     options = context;
     context = this;
@@ -420,7 +418,7 @@ function deferRender(tagPrefix, funcs, deferred) {
   return ['<', tagPrefix, ' ', hook, '>', '</', tagName, '>'].join('');
 }
 
-Mustache.registerHelper('with_current_user_as', function (name, options) {
+can.stache.registerHelper('with_current_user_as', function (name, options) {
   if (!options) {
     options = name;
     name = 'current_user';
@@ -438,7 +436,7 @@ Mustache.registerHelper('with_current_user_as', function (name, options) {
   }
 });
 
-Mustache.registerHelper('option_select',
+can.stache.registerHelper('option_select',
   function (object, attrName, role, options) {
     let selectedOption = object.attr(attrName);
     let selectedId = selectedOption ? selectedOption.id : null;
@@ -490,7 +488,7 @@ Mustache.registerHelper('option_select',
    * @param {Object} options - a CanJS options argument passed to every helper
    * @return {String} - the link HTML snippet
    */
-Mustache.registerHelper('view_object_link', function (instance, options) {
+can.stache.registerHelper('view_object_link', function (instance, options) {
   let linkText;
 
   function onRenderComplete(link) {
@@ -515,12 +513,12 @@ Mustache.registerHelper('view_object_link', function (instance, options) {
   return deferRender('a', onRenderComplete, instance.get_permalink());
 });
 
-Mustache.registerHelper('schemed_url', function (url) {
+can.stache.registerHelper('schemed_url', function (url) {
   let domain;
   let maxLabel;
   let urlSplit;
 
-  url = Mustache.resolve(url);
+  url = can.Mustache.resolve(url);
   if (!url) {
     return;
   }
@@ -547,7 +545,7 @@ Mustache.registerHelper('schemed_url', function (url) {
   return url;
 });
 
-Mustache.registerHelper('show_long', function () {
+can.stache.registerHelper('show_long', function () {
   return [
     '<a href="javascript://" class="show-long"',
     can.view.hook(function (el, parent) {
@@ -583,7 +581,7 @@ Mustache.registerHelper('show_long', function () {
   ].join('');
 });
 
-Mustache.registerHelper('using', function (options) {
+can.stache.registerHelper('using', function (options) {
   let refreshQueue = new RefreshQueue();
   let frame = new can.Observe();
   let args = can.makeArray(arguments);
@@ -596,7 +594,7 @@ Mustache.registerHelper('using', function (options) {
     for (i in options.hash) {
       if (options.hash.hasOwnProperty(i)) {
         arg = options.hash[i];
-        arg = Mustache.resolve(arg);
+        arg = can.Mustache.resolve(arg);
         if (arg && arg.reify) {
           refreshQueue.enqueue(arg.reify());
           frame.attr(i, arg.reify());
@@ -614,7 +612,7 @@ Mustache.registerHelper('using', function (options) {
   return deferRender('span', finish, refreshQueue.trigger());
 });
 
-Mustache.registerHelper('with_mapping', function (binding, options) {
+can.stache.registerHelper('with_mapping', function (binding, options) {
   let context = arguments.length > 2 ? resolveComputed(options) : this;
   let frame = new can.Observe();
   let loader;
@@ -622,7 +620,7 @@ Mustache.registerHelper('with_mapping', function (binding, options) {
   if (!context) { // can't find an object to map to.  Do nothing;
     return;
   }
-  binding = Mustache.resolve(binding);
+  binding = can.Mustache.resolve(binding);
   loader = Mappings.get_binding(binding, context);
   if (!loader) {
     return;
@@ -643,7 +641,7 @@ Mustache.registerHelper('with_mapping', function (binding, options) {
     loader.refresh_instances());
 });
 
-Mustache.registerHelper('person_roles', function (person, scope, options) {
+can.stache.registerHelper('person_roles', function (person, scope, options) {
   let rolesDeferred = new $.Deferred();
   let refreshQueue = new RefreshQueue();
 
@@ -652,7 +650,7 @@ Mustache.registerHelper('person_roles', function (person, scope, options) {
     scope = null;
   }
 
-  person = Mustache.resolve(person);
+  person = can.Mustache.resolve(person);
   person = person.reify();
   refreshQueue.enqueue(person);
   // Force monitoring of changes to `person.user_roles`
@@ -709,8 +707,8 @@ Mustache.registerHelper('person_roles', function (person, scope, options) {
  *    * date: MM/DD/YYYY),
  *    * datetime (MM/DD/YYYY hh:mm:ss [PM|AM] [local timezone])
  */
-Mustache.registerHelper('date', function (date, hideTime) {
-  date = Mustache.resolve(date);
+can.stache.registerHelper('date', function (date, hideTime) {
+  date = can.Mustache.resolve(date);
   return formatDate(date, hideTime);
 });
 
@@ -720,8 +718,9 @@ Mustache.registerHelper('date', function (date, hideTime) {
  *  @return {String} - datetime string in the following format:
  *  (MM/DD/YYYY hh:mm:ss [PM|AM] [local timezone])
  */
-Mustache.registerHelper('dateTime', function (date) {
-  date = Mustache.resolve(date);
+can.stache.registerHelper('dateTime', function (date) {
+  debugger;
+  date = can.Mustache.resolve(date);
   return getFormattedLocalDate(date);
 });
 
@@ -732,7 +731,7 @@ Mustache.registerHelper('dateTime', function (date) {
  *  {{#is_allowed ACTION RESOURCE_INSTANCE}} content {{/is_allowed}}
  */
 let allowedActions = ['create', 'read', 'update', 'delete', '__GGRC_ADMIN__'];
-Mustache.registerHelper('is_allowed', function () {
+can.stache.registerHelper('is_allowed', function () {
   let args = Array.prototype.slice.call(arguments, 0);
   let actions = [];
   let resource;
@@ -810,7 +809,7 @@ Mustache.registerHelper('is_allowed', function () {
     options.inverse(options.contexts || this);
 });
 
-Mustache.registerHelper('any_allowed', function (action, data, options) {
+can.stache.registerHelper('any_allowed', function (action, data, options) {
   let passed = [];
   let hasPassed;
   data = resolveComputed(data);
@@ -824,7 +823,7 @@ Mustache.registerHelper('any_allowed', function (action, data, options) {
   return options[hasPassed ? 'fn' : 'inverse'](options.contexts || this);
 });
 
-Mustache.registerHelper('is_allowed_all',
+can.stache.registerHelper('is_allowed_all',
   function (action, instances, options) {
     let passed = true;
 
@@ -863,7 +862,7 @@ Mustache.registerHelper('is_allowed_all',
     }
   });
 
-Mustache.registerHelper('is_allowed_to_map',
+can.stache.registerHelper('is_allowed_to_map',
   function (source, target, options) {
     //  For creating mappings, we only care if the user has update permission on
     //  source and/or target.
@@ -881,7 +880,7 @@ Mustache.registerHelper('is_allowed_to_map',
     return options.inverse(options.contexts || this);
   });
 
-Mustache.registerHelper('is_allowed_to_map_task', (sourceType, options) => {
+can.stache.registerHelper('is_allowed_to_map_task', (sourceType, options) => {
   const mappableTypes = ['Program', 'Regulation', 'Policy', 'Standard',
     'Contract', 'Requirement', 'Control', 'Objective',
     'OrgGroup', 'Vendor', 'AccessGroup', 'System', 'Process', 'DataAsset',
@@ -901,9 +900,9 @@ function resolveComputed(maybeComputed, alwaysResolve) {
     resolveComputed(maybeComputed(), alwaysResolve) : maybeComputed;
 }
 
-Mustache.registerHelper('attach_spinner', function (spinOpts, styles) {
-  spinOpts = Mustache.resolve(spinOpts);
-  styles = Mustache.resolve(styles);
+can.stache.registerHelper('attach_spinner', function (spinOpts, styles) {
+  spinOpts = can.Mustache.resolve(spinOpts);
+  styles = can.Mustache.resolve(styles);
   spinOpts = typeof spinOpts === 'string' ? JSON.parse(spinOpts) : {};
   styles = typeof styles === 'string' ? styles : '';
   return function (el) {
@@ -913,14 +912,14 @@ Mustache.registerHelper('attach_spinner', function (spinOpts, styles) {
   };
 });
 
-Mustache.registerHelper('json_escape', function (obj, options) {
+can.stache.registerHelper('json_escape', function (obj, options) {
   let str = JSON.stringify(String(resolveComputed(obj) || ''));
   return str.substr(1, str.length - 2);
 });
 
-Mustache.registerHelper('json_stringify', function (obj, options) {
+can.stache.registerHelper('json_stringify', function (obj, options) {
   let fields = (options.hash && options.hash.fields || '').split(',');
-  obj = Mustache.resolve(obj);
+  obj = can.Mustache.resolve(obj);
   return JSON.stringify(_.pick(obj.serialize(), fields));
 });
 
@@ -948,14 +947,15 @@ function localizeDate(date, options, tmpl, allowNonISO) {
   return '';
 }
 
-Mustache.registerHelper('localize_date', function (date, allowNonISO, options) {
-  // allowNonIso was not passed
-  if (!options) {
-    options = allowNonISO;
-    allowNonISO = false;
-  }
-  return localizeDate(date, options, 'MM/DD/YYYY', allowNonISO);
-});
+can.stache.registerHelper('localize_date',
+  function (date, allowNonISO, options) {
+    // allowNonIso was not passed
+    if (!options) {
+      options = allowNonISO;
+      allowNonISO = false;
+    }
+    return localizeDate(date, options, 'MM/DD/YYYY', allowNonISO);
+  });
 
 /**
  *  Helper for rendering date or 'Today' string.
@@ -963,7 +963,7 @@ Mustache.registerHelper('localize_date', function (date, allowNonISO, options) {
  *  @param {Date} value - the date object; if it's falsey the current (local) date is used
  *  @return {String} - 'Today' or date string in the following format: MM/DD/YYYY
  */
-Mustache.registerHelper('localize_date_today', function (value) {
+can.stache.registerHelper('localize_date_today', function (value) {
   let date = resolveComputed(value);
   let today = moment().startOf('day');
   let startOfDate = moment(date).startOf('day');
@@ -974,17 +974,17 @@ Mustache.registerHelper('localize_date_today', function (value) {
   return localizeDate(value, value, 'MM/DD/YYYY');
 });
 
-Mustache.registerHelper('capitalize', function (value, options) {
+can.stache.registerHelper('capitalize', function (value, options) {
   value = resolveComputed(value) || '';
   return can.capitalize(value);
 });
 
-Mustache.registerHelper('lowercase', function (value, options) {
+can.stache.registerHelper('lowercase', function (value, options) {
   value = resolveComputed(value) || '';
   return value.toLowerCase();
 });
 
-Mustache.registerHelper('assignee_types', function (value, options) {
+can.stache.registerHelper('assignee_types', function (value, options) {
   function capitalizeFirst(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
@@ -1001,38 +1001,61 @@ Mustache.registerHelper('assignee_types', function (value, options) {
   return _.isEmpty(value) ? '' : '(' + capitalizeFirst(value) + ')';
 });
 
-Mustache.registerHelper('is_dashboard', function (options) {
-  return /dashboard/.test(window.location) ?
+can.stache.registerHelper('is_dashboard', function (options) {
+  let frag = /dashboard/.test(window.location) ?
     options.fn(options.contexts) :
     options.inverse(options.contexts);
+
+  // return /dashboard/.test(window.location) ?
+  //   options.fn(options.contexts) :
+  //   options.inverse(options.contexts);
+  return $('<div>').append(frag).html();
 });
 
-Mustache.registerHelper('is_dashboard_or_all', function (options) {
-  return (/dashboard/.test(window.location) ||
+can.stache.registerHelper('is_dashboard_or_all', function (options) {
+  let frag = (/dashboard/.test(window.location) ||
     /objectBrowser/.test(window.location)) ?
     options.fn(options.contexts) :
     options.inverse(options.contexts);
+  // return (/dashboard/.test(window.location) ||
+  //   /objectBrowser/.test(window.location)) ?
+  //   options.fn(options.contexts) :
+  //   options.inverse(options.contexts);
+  return $('<div>').append(frag).html();
 });
 
-Mustache.registerHelper('is_admin_page', (options) => {
-  return isAdmin() ?
+can.stache.registerHelper('is_admin_page', (options) => {
+  let frag = isAdmin()  ?
     options.fn(options.contexts) :
     options.inverse(options.contexts);
+  return $('<div>').append(frag).html();
+  // return isAdmin() ?
+  //   options.fn(options.contexts) :
+  //   options.inverse(options.contexts);
 });
 
-Mustache.registerHelper('current_user_is_admin', function (options) {
+can.stache.registerHelper('current_user_is_admin', (instance, options) => {
+  let frag;
+  let html;
+
   if (Permission.is_allowed('__GGRC_ADMIN__')) {
-    return options.fn(options.contexts);
+    frag = options.fn(options.contexts);
+    html = $('<div>').append(frag).html();
+    return html;
+    // return options.fn(options.contexts);
   }
-  return options.inverse(options.contexts);
+  frag = options.inverse(options.contexts);
+  html = $('<div>').append(frag).html();
+  return html;
+  // return options.inverse(options.contexts);
 });
 
-Mustache.registerHelper('default_audit_title', function (instance, options) {
+can.stache.registerHelper('default_audit_title', function (instance, options) {
   let index;
   let program;
   let title;
 
-  instance = Mustache.resolve(instance);
+  instance = can.Mustache.resolve(instance);
   program = instance.attr('program');
 
   if (!instance._transient) {
@@ -1069,7 +1092,7 @@ Mustache.registerHelper('default_audit_title', function (instance, options) {
   });
 });
 
-Mustache.registerHelper('urlPath', function () {
+can.stache.registerHelper('urlPath', function () {
   return window.location.pathname;
 });
 
@@ -1113,7 +1136,7 @@ Mustache.registerHelper('urlPath', function () {
     conjunctions and disjunctions to one using a can.reduce(Array, function (Deferred, item) {}, $.when())
     pattern instead of can.reduce(Array, function (Boolean, item) {}, Boolean) pattern. --BM 8/29/2014
 */
-Mustache.registerHelper('if_helpers', function () {
+can.stache.registerHelper('if_helpers', function () {
   let args = arguments;
   let options = arguments[arguments.length - 1];
   let helperResult;
@@ -1211,22 +1234,24 @@ Mustache.registerHelper('if_helpers', function () {
 
     // Execute based on the result
     if (result) {
+      // return $('<div>').append(options.fn(options.contexts)).html();
       return options.fn(options.contexts);
     } else {
+      // return $('<div>').append(options.inverse(options.contexts)).html();
       return options.inverse(options.contexts);
     }
   }
 });
 
-Mustache.registerHelper('with_model_as',
+can.stache.registerHelper('with_model_as',
   function (varName, modelName, options) {
     let frame = {};
-    modelName = resolveComputed(Mustache.resolve(modelName));
+    modelName = resolveComputed(can.Mustache.resolve(modelName));
     frame[varName] = modalModels[modelName];
     return options.fn(options.contexts.add(frame));
   });
 
-Mustache.registerHelper('if_in', function (needle, haystack, options) {
+can.stache.registerHelper('if_in', function (needle, haystack, options) {
   needle = resolveComputed(needle);
   haystack = resolveComputed(haystack).split(',');
 
@@ -1236,7 +1261,7 @@ Mustache.registerHelper('if_in', function (needle, haystack, options) {
   return options[found ? 'fn' : 'inverse'](options.contexts);
 });
 
-Mustache.registerHelper('if_instance_of', function (inst, cls, options) {
+can.stache.registerHelper('if_instance_of', function (inst, cls, options) {
   let result;
   cls = resolveComputed(cls);
   inst = resolveComputed(inst);
@@ -1258,11 +1283,11 @@ Mustache.registerHelper('if_instance_of', function (inst, cls, options) {
   return options[result ? 'fn' : 'inverse'](options.contexts);
 });
 
-Mustache.registerHelper('prune_context', function (options) {
+can.stache.registerHelper('prune_context', function (options) {
   return options.fn(new can.view.Scope(options.context));
 });
 
-Mustache.registerHelper('mixed_content_check', function (url, options) {
+can.stache.registerHelper('mixed_content_check', function (url, options) {
   url = Mustache.getHelper('schemed_url', options.contexts).fn(url);
   if (window.location.protocol === 'https:' && !/^https:/.test(url)) {
     return options.inverse(options.contexts);
@@ -1271,18 +1296,19 @@ Mustache.registerHelper('mixed_content_check', function (url, options) {
   }
 });
 
-Mustache.registerHelper('ggrc_config_value', function (key, default_, options) {
-  key = resolveComputed(key);
-  if (!options) {
-    options = default_;
-    default_ = null;
-  }
-  default_ = resolveComputed(default_);
-  default_ = default_ || '';
-  return can.getObject(key, [GGRC.config]) || default_;
-});
+can.stache.registerHelper('ggrc_config_value',
+  function (key, default_, options) {
+    key = resolveComputed(key);
+    if (!options) {
+      options = default_;
+      default_ = null;
+    }
+    default_ = resolveComputed(default_);
+    default_ = default_ || '';
+    return can.getObject(key, [GGRC.config]) || default_;
+  });
 
-Mustache.registerHelper('if_config_exist', function (key, options) {
+can.stache.registerHelper('if_config_exist', function (key, options) {
   key = resolveComputed(key);
   let configValue = can.getObject(key, [GGRC.config]);
 
@@ -1291,32 +1317,36 @@ Mustache.registerHelper('if_config_exist', function (key, options) {
     options.inverse(options.contexts);
 });
 
-Mustache.registerHelper('switch', function (value, options) {
+can.stache.registerHelper('switch', function (value, options) {
   let frame = new can.Observe({});
   value = resolveComputed(value);
   frame.attr(value || 'default', true);
   frame.attr('default', true);
-  return options.fn(options.contexts.add(frame), {
+  let frag = options.fn(options.contexts.add(frame), {
     helpers: {
       'case': function (val, options) {
         val = resolveComputed(val);
         if (options.context[val]) {
           options.context.attr ? options.context.attr('default', false) :
             (options.context.default = false);
-          return options.fn(options.contexts);
+          let frag1 = options.fn(options.contexts);
+          let html = $('<div>').append(frag1).html();
+          return html;
+          // return options.fn(options.contexts);
         }
       },
     },
   });
+  return $('<div>').append(frag).html();
 });
 
-Mustache.registerHelper('with_mapping_count',
+can.stache.registerHelper('with_mapping_count',
   function (instance, mappingName, options) {
     let relevant;
     let dfd;
 
-    mappingName = Mustache.resolve(mappingName);
-    instance = Mustache.resolve(instance);
+    mappingName = can.Mustache.resolve(mappingName);
+    instance = can.Mustache.resolve(instance);
 
     relevant = {
       id: instance.id,
@@ -1335,7 +1365,7 @@ Mustache.registerHelper('with_mapping_count',
     dfd);
   });
 
-Mustache.registerHelper('log', function () {
+can.stache.registerHelper('log', function () {
   let args = can.makeArray(arguments).slice(0, arguments.length - 1);
   console.warn(
     ...['Mustache log'].concat(_.map(args, function (arg) {
@@ -1343,16 +1373,16 @@ Mustache.registerHelper('log', function () {
     })));
 });
 
-Mustache.registerHelper('autocomplete_select', function (disableCreate, opt) {
+can.stache.registerHelper('autocomplete_select', function (disableCreate, opt) {
   let cls;
   let options = arguments[arguments.length - 1];
-  let _disableCreate = Mustache.resolve(disableCreate);
+  let _disableCreate = can.Mustache.resolve(disableCreate);
 
   if (typeof (_disableCreate) !== 'boolean') {
     _disableCreate = false;
   }
   if (options.hash && options.hash.controller) {
-    cls = Mustache.resolve(cls);
+    cls = can.Mustache.resolve(cls);
     if (typeof cls === 'string') {
       cls = can.getObject(cls);
     }
@@ -1368,8 +1398,8 @@ Mustache.registerHelper('autocomplete_select', function (disableCreate, opt) {
   };
 });
 
-Mustache.registerHelper('grdive_msg_to_id', function (message) {
-  let msg = Mustache.resolve(message);
+can.stache.registerHelper('grdive_msg_to_id', function (message) {
+  let msg = can.Mustache.resolve(message);
 
   if (!msg) {
     return;
@@ -1379,10 +1409,10 @@ Mustache.registerHelper('grdive_msg_to_id', function (message) {
   return msg[msg.length-1];
 });
 
-Mustache.registerHelper('disable_if_errors', function (instance) {
+can.stache.registerHelper('disable_if_errors', function (instance) {
   let ins;
   let res;
-  ins = Mustache.resolve(instance);
+  ins = can.Mustache.resolve(instance);
   res = ins.computed_unsuppressed_errors();
   if (res === null || res === undefined) {
     return '';
@@ -1402,7 +1432,7 @@ Mustache.registerHelper('disable_if_errors', function (instance) {
  * @throws {String} If the type of the `instance` is not "Document" or if its
  *   "title" attribute is empty.
  */
-Mustache.registerHelper('file_type', function (instance) {
+can.stache.registerHelper('file_type', function (instance) {
   let extension;
   let filename;
   let parts;
@@ -1468,7 +1498,7 @@ Mustache.registerHelper('file_type', function (instance) {
   return FILE_EXTENSION_TYPES[extension] || DEFAULT_VALUE;
 });
 
-Mustache.registerHelper('debugger', function () {
+can.stache.registerHelper('debugger', function () {
   // This just gives you a helper that you can wrap around some code in a
   // template to see what's in the context. Dev tools need to be open for this
   // to work (in Chrome at least).
@@ -1478,8 +1508,8 @@ Mustache.registerHelper('debugger', function () {
   return options.fn(options.contexts);
 });
 
-Mustache.registerHelper('update_link', function (instance, options) {
-  instance = Mustache.resolve(instance);
+can.stache.registerHelper('update_link', function (instance, options) {
+  instance = can.Mustache.resolve(instance);
   if (instance.viewLink) {
     let link = window.location.host + instance.viewLink;
     instance.attr('link', link);
@@ -1503,7 +1533,7 @@ Mustache.registerHelper('update_link', function (instance, options) {
    * @param {Object} instance - an instance of a model object
    * @return {String} - the retrieved attribute's value
    */
-Mustache.registerHelper('get_default_attr_value',
+can.stache.registerHelper('get_default_attr_value',
   function (attrName, instance) {
     // attribute names considered "default" and representing a date
     let DATE_ATTRS = Object.freeze({
@@ -1550,8 +1580,8 @@ Mustache.registerHelper('get_default_attr_value',
     const regexTags = /<[^>]*>?/g;
     const regexNewLines = /<\/p>?/g;
 
-    instance = Mustache.resolve(instance);
-    attrName = Mustache.resolve(attrName);
+    instance = can.Mustache.resolve(instance);
+    attrName = can.Mustache.resolve(attrName);
 
     res = instance.attr(attrName);
 
@@ -1579,8 +1609,8 @@ Mustache.registerHelper('get_default_attr_value',
   }
 );
 
-Mustache.registerHelper('pretty_role_name', function (name) {
-  name = Mustache.resolve(name);
+can.stache.registerHelper('pretty_role_name', function (name) {
+  name = can.Mustache.resolve(name);
   let ROLE_LIST = {
     ProgramOwner: 'Program Manager',
     ProgramEditor: 'Program Editor',
@@ -1596,8 +1626,8 @@ Mustache.registerHelper('pretty_role_name', function (name) {
   return name;
 });
 
-Mustache.registerHelper('role_scope', function (scope) {
-  scope = Mustache.resolve(scope);
+can.stache.registerHelper('role_scope', function (scope) {
+  scope = can.Mustache.resolve(scope);
 
   if (scope === 'Private Program') {
     return 'Program';
@@ -1614,7 +1644,7 @@ Example:
     {{log .}} // {example1: "a", example2: "b"}
   {{/add_to_current_scope}}
 */
-Mustache.registerHelper('add_to_current_scope', function (options) {
+can.stache.registerHelper('add_to_current_scope', function (options) {
   return options.fn(options.contexts
     .add(_.assign({}, options.context, options.hash)));
 });
@@ -1625,8 +1655,8 @@ Add spaces to a CamelCase string.
 Example:
 {{un_camel_case "InProgress"}} becomes "In Progress"
 */
-Mustache.registerHelper('un_camel_case', function (str, toLowerCase) {
-  let value = Mustache.resolve(str);
+can.stache.registerHelper('un_camel_case', function (str, toLowerCase) {
+  let value = can.Mustache.resolve(str);
   toLowerCase = typeof toLowerCase !== 'object';
   if (!value) {
     return value;
@@ -1642,7 +1672,7 @@ Mustache.registerHelper('un_camel_case', function (str, toLowerCase) {
    * @param {String} target - Target type
    * @param {Object} options - a CanJS options argument passed to every helper
    */
-Mustache.registerHelper('is_mappable_type',
+can.stache.registerHelper('is_mappable_type',
   function (source, target, options) {
     target = Mustache.resolve(target);
     source = Mustache.resolve(source);
@@ -1672,19 +1702,19 @@ Mustache.registerHelper('is_mappable_type',
    *   validation errors
    * @param {Object} options - a CanJS options argument passed to every helper
    */
-Mustache.registerHelper(
+can.stache.registerHelper(
   'validation_error',
   function (validationErrors, propertyName, options) {
     let errors;
     let property;
     let contextStack;
 
-    validationErrors = Mustache.resolve(validationErrors) || {};
+    validationErrors = can.Mustache.resolve(validationErrors) || {};
     if (_.isFunction(validationErrors)) {
-      validationErrors = Mustache.resolve(validationErrors) || {};
+      validationErrors = can.Mustache.resolve(validationErrors) || {};
     }
 
-    property = Mustache.resolve(propertyName);
+    property = can.Mustache.resolve(propertyName);
     errors = validationErrors[property] || [];
 
     if (errors.length > 0) {
@@ -1695,7 +1725,7 @@ Mustache.registerHelper(
   }
 );
 
-Mustache.registerHelper('isNotInScopeModel', function (modelName, options) {
+can.stache.registerHelper('isNotInScopeModel', function (modelName, options) {
   let isInScope;
   modelName = _.isFunction(modelName) ? modelName() : modelName;
   isInScope = isInScopeModel(modelName);
@@ -1704,23 +1734,23 @@ Mustache.registerHelper('isNotInScopeModel', function (modelName, options) {
   return isInScope ? options.inverse(this) : options.fn(this);
 });
 
-Mustache.registerHelper('modifyFieldTitle', function (type, field, options) {
+can.stache.registerHelper('modifyFieldTitle', function (type, field, options) {
   let titlesMap = {
     Cycle: 'Cycle ',
     CycleTaskGroup: 'Group ',
     CycleTaskGroupObjectTask: 'Task ',
   };
-  type = Mustache.resolve(type);
+  type = can.Mustache.resolve(type);
 
   return titlesMap[type] ? titlesMap[type] + field : field;
 });
 
-Mustache.registerHelper('displayWidgetTab',
+can.stache.registerHelper('displayWidgetTab',
   function (widget, instance, options) {
     let displayTab;
     let inForceShowList;
-    widget = Mustache.resolve(widget);
-    instance = Mustache.resolve(instance);
+    widget = can.Mustache.resolve(widget);
+    instance = can.Mustache.resolve(instance);
 
     inForceShowList = can.inArray(widget.attr('internav_display'),
       instance.constructor.obj_nav_options.force_show_list) > -1;
@@ -1733,13 +1763,17 @@ Mustache.registerHelper('displayWidgetTab',
         inForceShowList;
 
     if (!displayTab) {
-      return options.inverse(options.contexts);
+      let fragment = options.inverse(options.contexts);
+      return $('<div>').append(fragment).html();
+      // return options.inverse(options.contexts);
     }
-
-    return options.fn(options.contexts);
+    let fragment = options.fn(options.contexts);
+    return $('<div>').append(fragment).html();
+    // return options.fn(options.contexts);
   }
 );
-Mustache.registerHelper('is_auditor', function (options) {
+
+can.stache.registerHelper('is_auditor', function (options) {
   const audit = getPageInstance();
   if (audit.type !== 'Audit') {
     console.warn('is_auditor called on non audit page');
@@ -1752,8 +1786,8 @@ Mustache.registerHelper('is_auditor', function (options) {
   return options.inverse(options.contexts);
 });
 
-Mustache.registerHelper('has_role', function (role, instance, options) {
-  instance = Mustache.resolve(instance);
+can.stache.registerHelper('has_role', function (role, instance, options) {
+  instance = can.Mustache.resolve(instance);
   const acr = instance ? getRole(instance.type, role) : null;
 
   if (!acr) {
@@ -1772,7 +1806,7 @@ Mustache.registerHelper('has_role', function (role, instance, options) {
   }
 });
 
-Mustache.registerHelper('user_roles', (person, parentInstance, options) => {
+can.stache.registerHelper('user_roles', (person, parentInstance, options) => {
   const allRoles = GGRC.access_control_roles;
   let roles = {};
   let allRoleNames = [];
@@ -1780,16 +1814,16 @@ Mustache.registerHelper('user_roles', (person, parentInstance, options) => {
   if (!options) {
     // if parent instance is not defined in helper use page instance
     options = parentInstance;
-    parentInstance = Mustache.resolve(getPageInstance);
+    parentInstance = can.Mustache.resolve(getPageInstance);
   } else {
-    parentInstance = Mustache.resolve(parentInstance);
+    parentInstance = can.Mustache.resolve(parentInstance);
   }
 
   can.each(allRoles, (role) => {
     roles[role.id] = role;
   });
 
-  person = Mustache.resolve(person);
+  person = can.Mustache.resolve(person);
 
   if (parentInstance && parentInstance.access_control_list) {
     allRoleNames = _.uniq(parentInstance.access_control_list.filter(
@@ -1811,8 +1845,8 @@ Mustache.registerHelper('user_roles', (person, parentInstance, options) => {
   });
 });
 
-Mustache.registerHelper('isScopeModel', function (instance, options) {
-  const modelName = Mustache.resolve(instance).type;
+can.stache.registerHelper('isScopeModel', function (instance, options) {
+  const modelName = can.Mustache.resolve(instance).type;
 
   return isScopeModel(modelName) ? options.fn(this) : options.inverse(this);
 });

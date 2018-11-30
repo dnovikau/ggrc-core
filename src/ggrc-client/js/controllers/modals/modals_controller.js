@@ -92,7 +92,14 @@ export default can.Control({
     }
 
     if (!this.element.find('.modal-body').length) {
-      can.view(this.options.preload_view, {}, this.proxy('after_preload'));
+      $.ajax({
+        url: this.options.preload_view,
+        dataType: 'text',
+        async: false,
+      }).then((view) => {
+        let render = can.stache(view);
+        return render({});
+      }).then(this.proxy('after_preload'));
       return;
     }
 
@@ -255,15 +262,39 @@ export default can.Control({
   },
 
   fetch_templates: function (dfd) {
-    let that = this;
-    dfd = dfd ? dfd.then(function () {
-      return that.options;
+    // let that = this;
+    dfd = dfd ? dfd.then(() => {
+      return this.options;
     }) : $.when(this.options);
+
     return $.when(
-      can.view(this.options.content_view, dfd),
-      can.view(this.options.header_view, dfd),
-      can.view(this.options.button_view, dfd),
-      can.view(this.options.custom_attributes_view, dfd)
+      dfd.then((opts) => {
+        return $.ajax({url: opts.content_view, dataType: 'text', async: false})
+          .then((view) => {
+            return can.stache(view)(opts);
+          });
+      }),
+      dfd.then((opts) => {
+        return $.ajax({url: opts.header_view, dataType: 'text', async: false})
+          .then((view) => {
+            return can.stache(view)(opts);
+          });
+      }),
+      dfd.then((opts) => {
+        if (typeof(opts.button_view) === 'string') {
+          return $.ajax({url: opts.button_view, dataType: 'text', async: false})
+            .then((view) => {
+              return can.stache(view)(opts);
+            });
+        }
+        return opts.button_view(opts);
+      }),
+      dfd.then((opts) => {
+        return $.ajax({url: opts.custom_attributes_view, dataType: 'text', async: false})
+          .then((view) => {
+            return can.stache(view)(opts);
+          });
+      }),
     ).done(this.proxy('draw'));
   },
 

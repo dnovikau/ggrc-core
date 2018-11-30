@@ -16,7 +16,7 @@ import pubSub from '../pub-sub';
 
 export default can.Control({
   defaults: {
-    internav_view: '/static/mustache/dashboard/internav_list.stache',
+    internav_view: '/static/mustache/dashboard/internav_list.1.stache',
     pin_view: '.pin-content',
     widget_list: null,
     priorityTabs: null,
@@ -55,7 +55,13 @@ export default can.Control({
       this.route(newVal);
     });
 
-    can.view(this.options.internav_view, this.options, (frag) => {
+    $.ajax({
+      url: this.options.internav_view,
+      dataType: 'text',
+      async: false,
+    }).then((view) => {
+      let render = can.stache(view);
+      let frag = render(this.options);
       const isAuditScope = instance.type === 'Audit';
       this.element.append(frag);
       if (isAuditScope) {
@@ -64,6 +70,16 @@ export default can.Control({
       this.setTabsPriority();
       this.route(router.attr('widget'));
     });
+
+    // can.view(this.options.internav_view, this.options, (frag) => {
+    //   const isAuditScope = instance.type === 'Audit';
+    //   this.element.append(frag);
+    //   if (isAuditScope) {
+    //     this.element.addClass(this.options.instance.type.toLowerCase());
+    //   }
+    //   this.setTabsPriority();
+    //   this.route(router.attr('widget'));
+    // });
 
     this.on();
   },

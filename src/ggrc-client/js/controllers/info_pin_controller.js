@@ -36,6 +36,7 @@ export const pinContentHiddenClass = 'pin-content--hidden';
 export const pinContentMaximizedClass = 'pin-content--maximized';
 export const pinContentMinimizedClass = 'pin-content--minimized';
 
+
 export default can.Control({
   pluginName: 'cms_controllers_info_pin',
   defaults: {
@@ -75,7 +76,7 @@ export default can.Control({
     let self = this;
     import(/* webpackChunkName: "modalsCtrls" */'./modals')
       .then(() => {
-        this.element.html(can.view(view, {
+        let context = {
           instance: instance,
           isSnapshot: !!instance.snapshot || instance.isRevision,
           parentInstance: parentInstance,
@@ -92,7 +93,14 @@ export default can.Control({
           onClose: function () {
             return self.close.bind(self);
           },
-        }));
+        };
+        $.ajax({
+          url: view,
+          dataType: 'text',
+          async: false,
+        }).then((view) => {
+          this.element.html(can.stache(view)(context));
+        });
       });
   },
   prepareView: function (opts, el, maximizedState) {
@@ -162,7 +170,7 @@ export default can.Control({
   },
   confirmEdit: function (instance, modalDetails) {
     let confirmDfd = $.Deferred();
-    let renderer = can.view.stache(modalDetails.description);
+    let renderer = can.stache(modalDetails.description);
     confirm({
       modal_description: renderer(instance).textContent,
       modal_confirm: modalDetails.button,

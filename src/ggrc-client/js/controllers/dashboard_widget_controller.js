@@ -17,9 +17,7 @@ export default can.Control({
   },
 }, {
   init: function () {
-    let frag;
-    let dashboards =
-      getDashboards(this.options.instance);
+    let dashboards = getDashboards(this.options.instance);
 
     this.options.context = new can.Map({
       model: this.options.model,
@@ -31,10 +29,13 @@ export default can.Control({
         this.attr('activeDashboard', dashboard);
       },
     });
-
-    frag = can.view(this.options.widget_view,
-      this.options.context);
-    this.element.html(frag);
-    return 0;
+    $.ajax({
+      url: this.options.widget_view,
+      dataType: 'text',
+      async: false,
+    }).then((view) => {
+      this.element.html(can.stache(view)(this.options.context));
+      return 0;
+    });
   },
 });

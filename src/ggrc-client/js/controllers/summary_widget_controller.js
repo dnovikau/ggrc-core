@@ -49,7 +49,6 @@ export default can.Control({
   },
 }, {
   init: function () {
-    let frag;
     if (this.element.data('widget-view')) {
       this.options.widget_view = GGRC.stache_path +
         this.element.data('widget-view');
@@ -69,11 +68,17 @@ export default can.Control({
         },
       },
     });
-    frag = can.view(this.get_widget_view(this.element),
-      this.options.context);
-    this.widget_shown();
-    this.element.html(frag);
-    return 0;
+
+    $.ajax({
+      url: this.get_widget_view(this.element),
+      dataType: 'text',
+      async: false,
+    }).then((view) => {
+      let frag = can.stache(view)(this.options.context);
+      this.widget_shown();
+      this.element.html(frag);
+      return 0;
+    });
   },
   onRelationshipChange: function (model, ev, instance) {
     if (instance instanceof Relationship &&

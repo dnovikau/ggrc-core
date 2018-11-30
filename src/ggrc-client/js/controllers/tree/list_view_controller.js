@@ -65,12 +65,16 @@ export default TreeLoader({
     this.context.attr(this.options);
 
     if (this.options.header_view) {
-      can.view(this.options.header_view, $.when(this.context))
-        .then(function (frag) {
-          if (that.element) {
-            that.element.prepend(frag);
-          }
-        });
+      $.when(this.context, $.ajax({
+        url: this.options.header_view,
+        dataType: 'text',
+        async: false})
+      ).then((ctx, view) => {
+        let frag = can.stache(view[0])(ctx);
+        if (that.element) {
+          that.element.prepend(frag);
+        }
+      });
     }
 
     if (!this.options.list) {
@@ -167,13 +171,15 @@ export default TreeLoader({
   },
 
   init_view: function () {
-    let that = this;
-    return can.view(this.options.list_view, this.context, function (frag) {
-      that.element.find('.spinner, .tree-structure').hide();
-      that.element
-        .append(frag)
-        .trigger('loaded');
-      that.options.state.attr('loading', false);
+    $.ajax({
+      url: this.options.list_view,
+      dataType: 'text',
+      async: false,
+    }).then((view) => {
+      let frag = can.stache(view)(this.context);
+      this.element.find('.spinner, .tree-structure').hide();
+      this.element.append(frag).trigger('loaded');
+      this.options.state.attr('loading', false);
     });
   },
 

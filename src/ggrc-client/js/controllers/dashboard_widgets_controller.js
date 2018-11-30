@@ -1,6 +1,6 @@
 /*
-    Copyright (C) 2018 Google Inc.
-    Licensed under http://www.apache.org/licenses/LICENSE-2.0 <see LICENSE file>
+  Copyright (C) 2018 Google Inc.
+  Licensed under http://www.apache.org/licenses/LICENSE-2.0 <see LICENSE file>
 */
 
 import {
@@ -66,10 +66,13 @@ export default can.Control({
     if (this._prepare_deferred) {
       return this._prepare_deferred;
     }
-
-    this._prepare_deferred =
-      can.view(this.options.widget_view, $.when(this.options))
-        .then(this.proxy('draw_widget'));
+    this._prepare_deferred = $.when(this.options, $.ajax({
+      url: this.options.widget_view,
+      dataType: 'text',
+      async: false,
+    })).then((opts, view) => {
+      return can.stache(view[0])(opts);
+    }).then(this.proxy('draw_widget'));
 
     return this._prepare_deferred;
   },

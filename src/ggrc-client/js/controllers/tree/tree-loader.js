@@ -25,14 +25,12 @@ export default can.Control.extend({
         $wrapper.css('height', '40px');
       }
 
-      spinner = [
-        '<spinner toggle="showMe"',
-        '  size="large"',
-        '  extra-css-class="tree-items"',
-        '>',
-        '</spinner>',
-      ].join('');
-      renderer = can.view.stache(spinner);
+      spinner = 
+        `<spinner toggle="{showMe}"
+                  size="{large}"
+                  extra-css-class="{tree-items}">
+        '</spinner>`;
+      renderer = can.stache(spinner);
       spinner = renderer({showMe: true});
 
       // Admin dashboard
