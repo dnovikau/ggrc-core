@@ -9,6 +9,7 @@ import {
   caDefTypeName,
 } from './custom-attribute-config';
 import {CONTROL_TYPE} from '../control-utils.js';
+import * as canBatch from 'can-event/batch/batch';
 
 /**
  * Represents relationships between back-end custom attribute control types
@@ -269,7 +270,7 @@ export default class CustomAttributeObject {
     };
     const caValueKeys = can.Map.keys(caValue);
 
-    can.batch.start();
+    canBatch.start();
     // set for caValue requiered fields if they were missed
     _.forEach(requiredDefaultFields, (requiredValue, key) => {
       const hasMissedRequieredField = !caValueKeys.includes(key);
@@ -277,7 +278,7 @@ export default class CustomAttributeObject {
         caValue.attr(key, requiredValue);
       }
     });
-    can.batch.stop();
+    canBatch.stop();
   }
 
   /**

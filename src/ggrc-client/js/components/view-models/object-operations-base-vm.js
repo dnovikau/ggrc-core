@@ -6,6 +6,7 @@
 import Mappings from '../../models/mappers/mappings';
 import {getInstance} from '../../plugins/utils/models-utils';
 import * as businessModels from '../../models/business-models';
+import * as canBatch from 'can-event/batch/batch';
 
 /**
  *  @typedef SpecialConfig
@@ -157,7 +158,7 @@ const ObjectOperationsBaseVM = can.Map.extend({
    * @param {Object} config - Plain object with values for updating
    */
   update: function (config) {
-    can.batch.start();
+    canBatch.start();
 
     // do not update fields with the same values in VM and config
     _.forEach(config, (value, key) => {
@@ -173,7 +174,7 @@ const ObjectOperationsBaseVM = can.Map.extend({
       }
     });
 
-    can.batch.stop();
+    canBatch.stop();
   },
 });
 

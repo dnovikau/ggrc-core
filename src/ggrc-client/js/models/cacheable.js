@@ -17,6 +17,7 @@ import RefreshQueue from './refresh_queue';
 import tracker from '../tracker';
 import {delayLeavingPageUntil} from '../plugins/utils/current-page-utils';
 import Stub from './stub';
+import * as canBatch from 'can-event/batch/batch';
 
 function dateConverter(date, oldValue, fn, key) {
   let conversion = 'YYYY-MM-DD\\THH:mm:ss\\Z';
@@ -369,16 +370,16 @@ export default can.Model.extend({
 
       start = Date.now();
       while (sourceData.length > index && (Date.now() - start) < ms) {
-        can.batch.start();
+        canBatch.start();
         item = sourceData[index];
         index += 1;
         models = self.models([item]);
         instances.push(...models);
-        can.batch.stop();
+        canBatch.stop();
       }
-      can.batch.start();
+      canBatch.start();
       obsList.push(...instances);
-      can.batch.stop();
+      canBatch.stop();
     }
 
     // Trigger a setTimeout loop to modelize remaining objects

@@ -4,6 +4,7 @@
 */
 
 import template from './templates/export-panel.stache';
+import * as canBatch from 'can-event/batch/batch';
 
 export default can.Component.extend({
   tag: 'export-panel',
@@ -55,11 +56,11 @@ export default can.Component.extend({
         return;
       }
 
-      can.batch.start();
+      canBatch.start();
       items.forEach(function (item) {
         item.attr('isSelected', isSelected);
       });
-      can.batch.stop();
+      canBatch.stop();
     },
     setSelected: function () {
       this.attr('showMappings', true);

@@ -16,6 +16,7 @@ import Snapshot from '../../models/service-models/snapshot';
 import Stub from '../../models/stub';
 import * as businessModels from '../../models/business-models';
 import {getPageInstance} from '../../../js/plugins/utils/current-page-utils';
+import * as canBatch from 'can-event/batch/batch';
 
 export default can.Component.extend({
   tag: 'revisions-comparer',
@@ -179,7 +180,7 @@ export default can.Component.extend({
         if (index === 1) {
           const instWithProposedValues = new can.Map(content);
           // new model method overrides modified fields
-          can.batch.start();
+          canBatch.start();
           can.Map.keys(proposalContent).forEach((key) => {
             if (Array.isArray(proposalContent[key])) {
               instWithProposedValues.attr(key).replace(proposalContent[key]);
@@ -187,7 +188,7 @@ export default can.Component.extend({
               instWithProposedValues.attr(key, proposalContent[key]);
             }
           });
-          can.batch.stop();
+          canBatch.stop();
           content = instWithProposedValues.attr();
         }
 
