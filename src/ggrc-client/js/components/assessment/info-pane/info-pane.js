@@ -65,6 +65,7 @@ import {relatedAssessmentsTypes} from '../../../plugins/utils/models-utils';
 import {notifier, notifierXHR} from '../../../plugins/utils/notifiers-utils';
 import Evidence from '../../../models/business-models/evidence';
 import * as businessModels from '../../../models/business-models';
+import * as canBatch from 'can-event/batch/batch';
 
 const editableStatuses = ['Not Started', 'In Progress', 'Rework Needed'];
 
@@ -310,8 +311,8 @@ export default can.Component.extend({
     },
     removeItems: function (event, type) {
       let items = this.attr(type);
-
-      can.batch.start();
+      
+      canBatch.start();
       let resultItems = items.filter((item) => {
         let newItemIndex = _.findIndex(event.items, (newItem) => {
           return newItem === item;
@@ -320,7 +321,7 @@ export default can.Component.extend({
       });
 
       items.replace(resultItems);
-      can.batch.stop();
+      canBatch.stop();
     },
     addItems: function (event, type) {
       let items = event.items;
@@ -592,10 +593,10 @@ export default can.Component.extend({
 
       let title = 'Required ' + getLCAPopupTitle(errors);
 
-      can.batch.start();
+      canBatch.start();
       this.attr('modal.content', data);
       this.attr('modal.modalTitle', title);
-      can.batch.stop();
+      canBatch.stop();
       this.attr('modal.state.open', true);
     },
     setVerifierRoleId: function () {
