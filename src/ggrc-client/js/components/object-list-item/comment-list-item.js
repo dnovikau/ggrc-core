@@ -51,8 +51,17 @@ export default can.Component.extend({
         },
       },
       commentAuthorType: {
-        get: function () {
-          return this.attr('itemData.assignee_type') || false;
+        get() {
+          const capitalizeFirst = (string) => {
+            return string.charAt(0).toUpperCase() + string.slice(1);
+          };
+
+          let assignee = this.attr('itemData.assignee_type') || '';
+          assignee = _.head(_.map(assignee.split(','), (type) => {
+            let lowercaseType = _.trim(type).toLowerCase();
+            return lowercaseType === 'assessor' ? 'assignee' : lowercaseType;
+          }));
+          return _.isEmpty(assignee) ? '' : `(${capitalizeFirst(assignee)})`;
         },
       },
       hasRevision: {
