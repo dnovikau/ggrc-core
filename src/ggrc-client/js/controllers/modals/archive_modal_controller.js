@@ -12,7 +12,9 @@ export default ModalsController({
   },
 }, {
   init: function () {
-    this._super();
+    if (this._super) {
+      this._super();
+    }
   },
   'a.btn[data-toggle=archive]:not(:disabled) click': function (el, ev) {
     // Disable the cancel button.

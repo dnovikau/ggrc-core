@@ -9,12 +9,13 @@ let Stub = can.Map.extend({
       ? model.constructor.model_singular
       : model.type;
     let href = model.selfLink || model.href;
-
-    this._super({
-      id: model.id,
-      type,
-      href,
-    });
+    if (this._super) {
+      this._super({
+        id: model.id,
+        type,
+        href,
+      });
+    }
   },
 });
 
@@ -23,7 +24,7 @@ Stub.List = can.List.extend({
 }, {
   setup(models=[]) {
     let converted = models.map((model) => new Stub(model));
-    this._super(converted);
+    this._super && this._super(converted);
   },
 });
 

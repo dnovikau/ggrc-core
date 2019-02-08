@@ -28,7 +28,9 @@ const directListModels = {
   GGRC.ListLoaders.DirectListLoader =
     GGRC.ListLoaders.BaseListLoader.extend({}, {
       init: function (modelName, objectAttr, objectJoinAttr) {
-        this._super();
+        if (this._super) {
+          this._super();
+        }
 
         this.model_name = modelName;
         this.object_attr = objectAttr;

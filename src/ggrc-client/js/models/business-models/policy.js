@@ -42,6 +42,8 @@ export default Directive.extend({
       attr_sort_field: 'kind',
       order: 86,
     });
-    this._super(...arguments);
+    if (this._super) {
+      this._super(...arguments);
+    }
   },
 }, {});

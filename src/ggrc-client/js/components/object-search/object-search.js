@@ -24,7 +24,9 @@ export default can.Component.extend({
       resultsRequested: false,
       onSubmit: function () {
         this.attr('resultsRequested', true);
-        this._super();
+        if (this._super) {
+          this._super();
+        }
       },
     });
   },

@@ -74,12 +74,16 @@ export default Cacheable.extend({
   },
   statuses: ['Draft', 'Deprecated', 'Active'],
   init: function () {
-    this._super(...arguments);
+    if (this._super) {
+      this._super(...arguments);
+    }
     this.validateNonBlank('title');
   },
 }, {
   created() {
-    this._super(...arguments);
+    if (this._super) {
+      this._super(...arguments);
+    }
 
     if (!this._directive || !this._directive.id) {
       return;

@@ -227,7 +227,7 @@ export default can.Model.extend({
       delete this.mixins;
     }
 
-    let ret = this._super(...arguments);
+    let ret = this._super ? this._super(...arguments) : this;
 
     // set up default attribute converters/serializers for all classes
     Object.assign(this.attributes, {
@@ -316,7 +316,7 @@ export default can.Model.extend({
       //  -- doesn't work in nested objects).  So we're just going to not merge properties.
       return cache[args[this.id]];
     }
-    return this._super(...arguments);
+    return this._super ? this._super(...arguments) : this;
   },
   process_args: function (args) {
     let pargs = {};
@@ -345,7 +345,7 @@ export default can.Model.extend({
     if (!params || params.length === 0) {
       return new this.List();
     }
-    ms = this._super(params);
+    ms = this._super ? this._super(params) : this;
     if (params instanceof can.Map || params instanceof can.List) {
       params.replace(ms);
       return params;
@@ -432,7 +432,7 @@ export default can.Model.extend({
       model.attr(params);
       model.updateCaObjects(params.custom_attribute_values);
     } else {
-      model = this._super(params);
+      model = this._super ? this._super(params) : this;
     }
     return model;
   },
@@ -717,7 +717,7 @@ export default can.Model.extend({
     let serial = {};
     let val;
     if (arguments.length) {
-      return this._super(...arguments);
+      return this._super ? this._super(...arguments) : this;
     }
     /* Serialize only meaningful properties */
     Object.keys(this._data).forEach(function (name) {

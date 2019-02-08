@@ -78,28 +78,30 @@ export default Cacheable.extend({
     let redirectLink;
     let taskGroup;
 
-    this._super(...arguments)
-      .then((instance) => {
-        redirectLink = `${instance.viewLink}#task_group`;
-        instance.attr('_redirect', redirectLink);
-        if (!createDefaultTaskGroup || !taskGroupTitle ||
-          !isNew || instance.clone) {
-          dfd.resolve(instance);
-          // skip next 'then' chain
-          return $.Deferred().reject();
-        }
-        taskGroup = new TaskGroup({
-          title: taskGroupTitle,
-          workflow: instance,
-          contact: instance.modified_by,
-          context: instance.context,
-        });
-        return taskGroup.save();
-      })
-      .then(() => {
-        dfd.resolve(this);
-      })
-      .fail(dfd.reject);
+    if (this._super) {
+      this._super(...arguments)
+        .then((instance) => {
+          redirectLink = `${instance.viewLink}#task_group`;
+          instance.attr('_redirect', redirectLink);
+          if (!createDefaultTaskGroup || !taskGroupTitle ||
+            !isNew || instance.clone) {
+            dfd.resolve(instance);
+            // skip next 'then' chain
+            return $.Deferred().reject();
+          }
+          taskGroup = new TaskGroup({
+            title: taskGroupTitle,
+            workflow: instance,
+            contact: instance.modified_by,
+            context: instance.context,
+          });
+          return taskGroup.save();
+        })
+        .then(() => {
+          dfd.resolve(this);
+        })
+        .fail(dfd.reject);
+    }
 
     return dfd;
   },

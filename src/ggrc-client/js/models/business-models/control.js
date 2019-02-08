@@ -121,11 +121,15 @@ export default Cacheable.extend({
       }
     });
 
-    this._super(...arguments);
+    if (this._super) {
+      this._super(...arguments);
+    }
   },
 }, {
   init: function () {
-    this._super(...arguments);
+    if (this._super) {
+      this._super(...arguments);
+    }
     this.bind('refreshInstance', this.refresh.bind(this));
   },
 });

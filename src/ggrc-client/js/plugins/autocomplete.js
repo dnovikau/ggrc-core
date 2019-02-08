@@ -186,7 +186,9 @@ import {InfiniteScrollControl, LhnTooltipsControl} from '../controllers/infinite
       let permission = $that.data('permission-type');
       let searchtypes;
 
-      this._super(...arguments);
+      if (this._super) {
+        this._super(...arguments);
+      }
       this.options.search_params = {
         extra_params: searchParams,
       };

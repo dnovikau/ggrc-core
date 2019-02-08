@@ -212,7 +212,9 @@ const DashboardControl = can.Control.extend({
 const PageObjectControl = DashboardControl.extend({}, {
   init: function () {
     this.options.model = this.options.instance.constructor;
-    this._super();
+    if (this._super) {
+      this._super();
+    }
     this.init_info_pin();
   },
 
@@ -236,7 +238,9 @@ const PageObjectControl = DashboardControl.extend({}, {
     this.options.instance.bind('title', function () {
       thatSuper.apply(that);
     });
-    this._super();
+    if (this._super) {
+      this._super();
+    }
   },
 
   init_widget_descriptors: function () {

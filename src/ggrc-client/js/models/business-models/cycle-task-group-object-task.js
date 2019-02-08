@@ -164,8 +164,9 @@ export default Cacheable.extend({
   },
   init: function () {
     let assigneeRole = getRole('CycleTaskGroupObjectTask', 'Task Assignees');
-
-    this._super(...arguments);
+    if (this._super) {
+      this._super(...arguments);
+    }
     this.validateNonBlank('title');
     this.validateNonBlank('workflow');
     this.validateNonBlank('cycle');

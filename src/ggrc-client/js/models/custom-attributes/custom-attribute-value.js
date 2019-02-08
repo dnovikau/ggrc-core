@@ -19,10 +19,14 @@ export default Cacheable.extend({
     modified_by: Stub,
   },
   init: function () {
-    this._super(...arguments);
+    if (this._super) {
+      this._super(...arguments);
+    }
   },
 }, {
   init: function () {
-    this._super(...arguments);
+    if (this._super) {
+      this._super(...arguments);
+    }
   },
 });

@@ -84,7 +84,9 @@ export default Cacheable.extend({
    * applicable.
    */
   init: function () {
-    this._super(...arguments);
+    if (this._super) {
+      this._super(...arguments);
+    }
     this.validateNonBlank('title');
 
     this.validateListNonBlank(

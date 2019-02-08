@@ -190,7 +190,9 @@ const LhnTooltipsControl = can.Control.extend({
         this.options.fade_out_delay);
   },
   destroy: function () {
-    this._super();
+    if (this._super) {
+      this._super();
+    }
     this.on_mouseleave();
   },
 });

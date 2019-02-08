@@ -175,7 +175,7 @@ export default can.Construct.extend({
       return widgetDescriptors[id];
     }
 
-    ret = this._super(...arguments);
+    ret = this._super ? this._super(...arguments) : this;
     $.extend(ret, opts);
     widgetDescriptors[id] = ret;
     return ret;

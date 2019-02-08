@@ -35,6 +35,8 @@ export default Directive.extend({
   statuses: ['Draft', 'Deprecated', 'Active'],
   init: function () {
     Object.assign(this.attributes, Directive.attributes);
-    this._super(...arguments);
+    if (this._super) {
+      this._super(...arguments);
+    }
   },
 }, {});

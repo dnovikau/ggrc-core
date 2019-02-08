@@ -9,7 +9,9 @@ import Mappings from './mappings';
   GGRC.ListLoaders.MultiListLoader =
     GGRC.ListLoaders.BaseListLoader.extend({}, {
       init: function (sources) {
-        this._super();
+        if (this._super) {
+          this._super();
+        }
 
         this.sources = sources || [];
       },

@@ -284,7 +284,7 @@ export default Cacheable.extend({
   },
   isDirty: function (checkAssociations) {
     this._transformBackupProperty(['design', 'operationally']);
-    return this._super(checkAssociations);
+    return this._super ? this._super(checkAssociations) : this;
   },
   form_preload: function (newObjectForm) {
     let pageInstance = getPageInstance();

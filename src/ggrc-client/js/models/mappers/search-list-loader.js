@@ -28,7 +28,9 @@ const searchModels = {
   GGRC.ListLoaders.SearchListLoader =
     GGRC.ListLoaders.BaseListLoader.extend({}, {
       init: function (queryFunction, observeTypes) {
-        this._super();
+        if (this._super) {
+          this._super();
+        }
         this.observe_types = observeTypes && observeTypes.split(',');
         this.query_function = queryFunction;
       },

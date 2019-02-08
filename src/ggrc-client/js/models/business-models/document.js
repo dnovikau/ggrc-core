@@ -71,7 +71,9 @@ export default Cacheable.extend({
   },
   init: function () {
     this.validateNonBlank('title');
-    this._super(...arguments);
+    if (this._super) {
+      this._super(...arguments);
+    }
   },
 }, {
   kindTitle() {

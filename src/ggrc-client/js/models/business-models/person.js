@@ -73,9 +73,11 @@ export default Cacheable.extend({
     default_filter: ['Program', 'Control', 'Risk', 'Assessment'],
   },
   init: function () {
-    let rEmail =
-      /^[-!#$%&*+\\./0-9=?A-Z^_`{|}~]+@([-0-9A-Z]+\.)+([0-9A-Z]){2,4}$/i;
-    this._super(...arguments);
+    // let rEmail =
+    //   /^[-!#$%&*+\\./0-9=?A-Z^_`{|}~]+@([-0-9A-Z]+\.)+([0-9A-Z]){2,4}$/i;
+    if (this._super) {
+      this._super(...arguments);
+    }
 
     this.validateNonBlank('email');
     this.validateFormatOf('email', rEmail);

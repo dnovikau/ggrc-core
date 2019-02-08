@@ -57,11 +57,15 @@ export default Cacheable.extend({
     disable_columns_configuration: true,
   },
   init: function () {
-    this._super(...arguments);
+    if (this._super) {
+      this._super(...arguments);
+    }
     this.bind('created', refreshWorkflow.bind(this));
   },
 }, {
   init: function () {
-    this._super(...arguments);
+    if (this._super) {
+      this._super(...arguments);
+    }
   },
 });

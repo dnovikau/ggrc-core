@@ -27,10 +27,14 @@ export default Cacheable.extend({
   },
   init: function () {
     this.validateNonBlank('name');
-    this._super(...arguments);
+    if (this._super) {
+      this._super(...arguments);
+    }
   },
 }, {
   init: function () {
-    this._super(...arguments);
+    if (this._super) {
+      this._super(...arguments);
+    }
   },
 });

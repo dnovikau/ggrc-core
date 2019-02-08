@@ -11,12 +11,16 @@ export default ModalsController({
     content_view: GGRC.templates_path + '/gdrive/auth_button.stache',
   },
   init: function () {
-    this._super(...arguments);
+    if (this._super) {
+      this._super(...arguments);
+    }
     this.defaults.button_view = can.view.mustache('');
   },
 }, {
   init: function () {
-    this._super();
+    if (this._super) {
+      this._super();
+    }
     this.element.trigger('shown');
     this.element.addClass('gapi-modal-control');
   },

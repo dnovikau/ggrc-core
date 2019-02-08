@@ -69,6 +69,6 @@ export default Cacheable.extend({
     if (!this.context || !this.context.id) {
       this.attr('context', Program.findInCacheById(this.program.id).context);
     }
-    return this._super(...arguments);
+    return this._super ? this._super(...arguments) : this;
   },
 });

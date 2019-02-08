@@ -26,7 +26,9 @@ const proxyListModels = {
     GGRC.ListLoaders.BaseListLoader.extend({}, {
       init: function (modelName, objectAttr, optionAttr, objectJoinAttr,
         optionModelName) {
-        this._super();
+        if (this._super) {
+          this._super();
+        }
 
         this.model_name = modelName;
         this.object_attr = objectAttr;

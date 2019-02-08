@@ -14,7 +14,9 @@ export default ModalsController({
   },
 }, {
   init: function () {
-    this._super();
+    if (this._super) {
+      this._super();
+    }
   },
   '{$footer} a.btn[data-toggle=delete]:not(:disabled) click'(el, ev) {
     let that = this;

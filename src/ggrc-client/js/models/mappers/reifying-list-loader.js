@@ -10,7 +10,9 @@ import Mappings from './mappings';
   GGRC.ListLoaders.ReifyingListLoader =
     GGRC.ListLoaders.BaseListLoader.extend({}, {
       init: function (source) {
-        this._super();
+        if (this._super) {
+          this._super();
+        }
 
         if (source instanceof GGRC.ListLoaders.ListBinding) {
           this.source_binding = source;

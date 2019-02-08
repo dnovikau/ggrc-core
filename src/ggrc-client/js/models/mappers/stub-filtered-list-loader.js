@@ -9,7 +9,9 @@ import Mappings from './mappings';
   GGRC.ListLoaders.StubFilteredListLoader =
     GGRC.ListLoaders.BaseListLoader.extend({}, {
       init: function (source, filterFn) {
-        this._super();
+        if (this._super) {
+          this._super();
+        }
 
         this.source = source;
         this.filter_fn = filterFn;

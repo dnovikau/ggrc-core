@@ -70,7 +70,9 @@ export default Cacheable.extend({
   statuses: ['Draft', 'Deprecated', 'Active'],
   init: function () {
     this.validateNonBlank('title');
-    this._super(...arguments);
+    if (this._super) {
+      this._super(...arguments);
+    }
   },
 }, {
   readOnlyProgramRoles: function () {

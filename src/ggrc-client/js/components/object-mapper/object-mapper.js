@@ -157,7 +157,9 @@ export default can.Component.extend({
       onSubmit: function () {
         this.updateFreezedConfigToLatest();
         // calls base version
-        this._super(...arguments);
+        if (this._super) {
+          this._super(...arguments);
+        }
       },
     });
   },
