@@ -101,14 +101,14 @@ export default can.Component.extend({
     submitCreateUrlForm: function (url) {
       let existingUrls;
       let trimmedUrl = url.trim();
-      let isValid = this.validateUserInput(trimmedUrl);
+      // let isValid = this.validateUserInput(trimmedUrl);
 
       // non-valid user input case - empty string
-      if (!isValid) {
-        notifier('error', 'Please enter a URL.');
-        this.toggleFormVisibility(true);
-        return false;
-      }
+      // if (!isValid) {
+      //   notifier('error', 'Please enter a URL.');
+      //   this.toggleFormVisibility(true);
+      //   return false;
+      // }
 
       // duplicate URLs check
       existingUrls = _.map(this.attr('urls'), 'link');

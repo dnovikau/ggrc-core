@@ -26,7 +26,7 @@ export default Cacheable.extend({
     'delete': true,
   },
   init: function () {
-    this.validateNonBlank('name');
+    // this.validateNonBlank('name');
     if (this._super) {
       this._super(...arguments);
     }

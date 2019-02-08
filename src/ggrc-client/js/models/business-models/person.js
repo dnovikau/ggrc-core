@@ -79,9 +79,9 @@ export default Cacheable.extend({
       this._super(...arguments);
     }
 
-    this.validateNonBlank('email');
-    this.validateFormatOf('email', rEmail);
-    this.validateNonBlank('name');
+    // this.validateNonBlank('email');
+    // this.validateFormatOf('email', rEmail);
+    // this.validateNonBlank('name');
   },
 }, {
   display_name: function () {

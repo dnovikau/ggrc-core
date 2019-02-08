@@ -15,48 +15,48 @@
   // a few core CanJS extensions below.
   // Core validation for fields not being "blank", i.e.
   // having no content when outside spaces are trimmed away.
-  can.Model.validationMessages.non_blank =
-    can.Map.validationMessages.non_blank = 'cannot be blank';
+  // can.Model.validationMessages.non_blank =
+  //   can.Map.validationMessages.non_blank = 'cannot be blank';
 
-  can.Model.validateNonBlank =
-    can.Map.validateNonBlank = function (attrNames, options) {
-      this.validate(attrNames, options, function (value) {
-        if (_.isUndefined(value) ||
-            _.isNull(value) ||
-            _.isFunction(value.trim) && value.trim() === '') {
-          return this.constructor.validationMessages.non_blank;
-        }
-      });
-    };
+  // can.Model.validateNonBlank =
+  //   can.Map.validateNonBlank = function (attrNames, options) {
+  //     this.validate(attrNames, options, function (value) {
+  //       if (_.isUndefined(value) ||
+  //           _.isNull(value) ||
+  //           _.isFunction(value.trim) && value.trim() === '') {
+  //         return this.constructor.validationMessages.non_blank;
+  //       }
+  //     });
+  //   };
 
-  /**
-   * Validate an autocomplete list field to be not blank.
-   *
-   * It checks in the field contains either a false-value, or a
-   * non-constructor, or a constructor that builds an empty object and if so,
-   * returns a non_blank error message.
-   *
-   * @param {String} listFieldName - the name of the field with the
-   * autocomplete list
-   * @param {Function} condition - a zero-parameter function; the validation
-   * will be fired only if condition returns true or is undefined
-   * @param {Object} options - a CanJS options argument passed to CanJS
-   * validate function
-   *
-   */
-  can.Model.validateListNonBlank =
-    can.Map.validateListNonBlank = function (listFieldName, condition,
-      options) {
-      this.validate(listFieldName, options, function (newVal, prop) {
-        if (_.isUndefined(condition) || condition.call(this)) {
-          if (!newVal ||
-              !_.isFunction(newVal.attr) ||
-              _.isEmpty(newVal.attr())) {
-            return this.constructor.validationMessages.non_blank;
-          }
-        }
-      });
-    };
+  // /**
+  //  * Validate an autocomplete list field to be not blank.
+  //  *
+  //  * It checks in the field contains either a false-value, or a
+  //  * non-constructor, or a constructor that builds an empty object and if so,
+  //  * returns a non_blank error message.
+  //  *
+  //  * @param {String} listFieldName - the name of the field with the
+  //  * autocomplete list
+  //  * @param {Function} condition - a zero-parameter function; the validation
+  //  * will be fired only if condition returns true or is undefined
+  //  * @param {Object} options - a CanJS options argument passed to CanJS
+  //  * validate function
+  //  *
+  //  */
+  // can.Model.validateListNonBlank =
+  //   can.Map.validateListNonBlank = function (listFieldName, condition,
+  //     options) {
+  //     this.validate(listFieldName, options, function (newVal, prop) {
+  //       if (_.isUndefined(condition) || condition.call(this)) {
+  //         if (!newVal ||
+  //             !_.isFunction(newVal.attr) ||
+  //             _.isEmpty(newVal.attr())) {
+  //           return this.constructor.validationMessages.non_blank;
+  //         }
+  //       }
+  //     });
+  //   };
 
   can.camelCaseToUnderscore = function (string) {
     if (!_.isString(string)) {

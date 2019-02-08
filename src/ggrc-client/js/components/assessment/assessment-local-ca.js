@@ -200,13 +200,13 @@ export default can.Component.extend({
         e.field.attr('errorsMap.comment', true);
       }
 
-      let saveDfd = this.save(e.fieldId, e.value);
+      // let saveDfd = this.save(e.fieldId, e.value);
 
-      this.validateForm({
-        triggerAttachmentModals: true,
-        triggerField: e.field,
-        saveDfd: saveDfd,
-      });
+      // this.validateForm({
+      //   triggerAttachmentModals: true,
+      //   triggerField: e.field,
+      //   saveDfd: saveDfd,
+      // });
     },
   },
   events: {

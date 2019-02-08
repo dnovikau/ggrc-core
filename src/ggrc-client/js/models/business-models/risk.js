@@ -94,8 +94,8 @@ export default Cacheable.extend({
     if (this._super) {
       this._super(...arguments);
     }
-    reqFields.forEach(function (reqField) {
-      this.validatePresenceOf(reqField);
-    }.bind(this));
+    // reqFields.forEach(function (reqField) {
+    //   this.validatePresenceOf(reqField);
+    // }.bind(this));
   },
 }, {});

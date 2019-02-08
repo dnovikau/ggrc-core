@@ -70,7 +70,7 @@ export default Cacheable.extend({
       }],
   },
   init: function () {
-    this.validateNonBlank('title');
+    // this.validateNonBlank('title');
     if (this._super) {
       this._super(...arguments);
     }

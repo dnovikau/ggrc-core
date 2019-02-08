@@ -50,7 +50,7 @@ export default can.Component.extend({
       } = event;
 
       instance.customAttr(caId, caValue);
-      this.validateControls();
+      // this.validateControls();
     },
   },
   helpers: {

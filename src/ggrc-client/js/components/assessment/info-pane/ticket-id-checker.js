@@ -49,10 +49,10 @@ export default can.Component.extend({
       this.hideModal();
     },
     linkWithExistingTicket() {
-      let isValid = this.validateTicketId();
-      if (!isValid) {
-        return;
-      }
+      // let isValid = this.validateTicketId();
+      // if (!isValid) {
+      //   return;
+      // }
 
       this.attr('instance.issue_tracker.issue_id', this.attr('ticketId'));
       this.toggleIssueTracker(true);

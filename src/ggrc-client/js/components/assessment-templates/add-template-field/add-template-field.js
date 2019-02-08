@@ -36,9 +36,9 @@ export default can.Component.extend({
       this.attr('selected.invalidValues', false);
       this.attr('selected.invalidTitleError', '');
 
-      let validators = this.getValidators(title, fields);
-      this.validateTitle(validators);
-      this.validateValues(type, values);
+      // let validators = this.getValidators(title, fields);
+      // this.validateTitle(validators);
+      // this.validateValues(type, values);
 
       if (
         this.attr('selected.invalidValues') ||
