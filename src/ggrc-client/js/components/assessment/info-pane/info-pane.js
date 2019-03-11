@@ -244,6 +244,16 @@ export default can.Component.extend({
           },
         },
       },
+      isVerifyBtnDisabled: {
+        get() {
+          const currentLevelOfReview = this.attr('currentLevelOfReview');
+          if (currentLevelOfReview === 3 || currentLevelOfReview === 4) {
+            const groups = this.attr('reviewGroups');
+            return !groups[currentLevelOfReview].people.length;
+          }
+          return false;
+        },
+      },
     },
     modal: {
       state: {
@@ -589,7 +599,7 @@ export default can.Component.extend({
         newStatus === 'Verified'&&
         notFullyReviewed
       ) {
-        if (this.attr('currentLevelOfReview') === 2) {
+        if (currentLevelOfReview === 2) {
           [3, 4].forEach((ind) => {
             reviewGroups[ind].attr('disabled', false);
           });
@@ -598,7 +608,7 @@ export default can.Component.extend({
 
         this.attr('reviewGroups', reviewGroups.attr());
 
-        if (this.attr('currentLevelOfReview') !== reviewGroups.length) {
+        if (currentLevelOfReview !== reviewGroups.length) {
           this.attr('isUpdatingState', false);
           return;
         }
@@ -707,8 +717,17 @@ export default can.Component.extend({
       );
     },
     updateInstance() {
+      const reviewLevel = this.attr('currentLevelOfReview');
+      if (reviewLevel === 3 || reviewLevel === 4) {
+        const groups = this.attr('reviewGroups')
+        const isEmpty = groups[reviewLevel].people.length;
+
+        this.attr('isVerifyBtnDisabled', !isEmpty);
+      }
+
       let status = this.attr('instance.status');
       let saveDfd = this.attr('instance').save();
+
       saveDfd.then((resp) => {
         resp.attr('status', status);
       });
