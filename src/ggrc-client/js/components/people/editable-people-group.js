@@ -43,7 +43,8 @@ let viewModel = peopleGroupVM.extend({
     showSeeMoreLink: {
       get: function () {
         if (this.attr('instance.type') === 'Assessment' &&
-          this.attr('title') === 'Verifiers' && !!this.attr('people').length) {
+          this.attr('title') === 'Verifiers' && 
+          !!this.attr('currentVerifiers').length) {
           return true;
         }
         return !this.attr('editableMode') &&
