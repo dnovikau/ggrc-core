@@ -8,6 +8,7 @@ import PersonProfile from '../../models/service-models/person-profile';
 import RefreshQueue from '../../models/refresh_queue';
 import {getPageInstance} from './current-page-utils';
 import {notifier} from './notifiers-utils';
+import {getMappedAttrName} from '../ggrc_utils';
 
 function cacheCurrentUser() {
   Person.model(GGRC.current_user);
@@ -64,7 +65,7 @@ function getUserRoles(person) {
     allRoleNames = _.uniq(parentInstance.access_control_list.filter((acl) => {
       return acl.person.id === person.id && acl.ac_role_id in roles;
     }).map((acl) => {
-      return roles[acl.ac_role_id].name;
+      return getMappedAttrName(acl['object_type'], roles[acl.ac_role_id].name);
     }));
   } else {
     let globalRole = person.system_wide_role === 'No Access' ?
