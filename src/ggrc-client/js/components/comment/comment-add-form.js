@@ -10,6 +10,7 @@ import {COMMENT_CREATED} from '../../events/eventTypes';
 import tracker from '../../tracker';
 import {getAssigneeType} from '../../plugins/ggrc_utils';
 import {notifier} from '../../plugins/utils/notifiers-utils';
+import pubSub from '../../pub-sub';
 
 /**
  * A component that takes care of adding comments
@@ -66,10 +67,10 @@ export default can.Component.extend({
     },
     afterCreation: function (comment, wasSuccessful) {
       this.attr('isSaving', false);
-      this.dispatch({
-        type: 'afterCreate',
+      pubSub.dispatch({
+        type: 'relatedItemSaved',
         item: comment,
-        success: wasSuccessful,
+        itemType: 'comments',
       });
       if (wasSuccessful) {
         this.attr('instance').dispatch({
@@ -88,7 +89,11 @@ export default can.Component.extend({
 
       self.attr('isSaving', true);
       comment = self.updateComment(comment);
-      self.dispatch({type: 'beforeCreate', items: [comment]});
+      pubSub.dispatch({
+        type: 'relatedItemBeforeSave',
+        items: [comment],
+        itemType: 'comments',
+      });
 
       comment.save()
         .done(function () {
