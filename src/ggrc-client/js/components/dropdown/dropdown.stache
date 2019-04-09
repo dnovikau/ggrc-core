@@ -3,25 +3,21 @@
   Licensed under http://www.apache.org/licenses/LICENSE-2.0 <see LICENSE file>
 }}
 
-<select
-  tabindex="{{tabIndex}}"
-  class="{{firstnonempty className 'input-block-level'}}"
-  can-value="{{name}}"
-  null-if-empty="null-if-empty"
-  can-change="onChange"
-  {{#isDisabled}}disabled="disabled"{{/isDisabled}}
-  {{#controlId}}id="{{controlId}}"{{/controlId}}
-  >
-    {{#each options}}
-      {{#if ./title}}
+<select class="{{firstnonempty className 'input-block-level'}} {{#is(name, 'instance.status')}}status{{/is}}"
+        can-value="{{name}}" can-change="onChange"
+        null-if-empty="null-if-empty" tabindex="{{tabIndex}}"
+        {{#isDisabled}}disabled="disabled"{{/isDisabled}}
+        {{#controlId}}id="{{controlId}}"{{/controlId}}>
+  {{#each options}}
+    {{#if ./title}}
+      <option value="{{value}}">{{title}}</option>
+    {{/if}}
+    {{#if group}}
+      <optgroup label="{{group}}">
+      {{#subitems}}
         <option value="{{value}}">{{title}}</option>
-      {{/if}}
-      {{#if group}}
-        <optgroup label="{{group}}">
-        {{#subitems}}
-          <option value="{{value}}">{{title}}</option>
-        {{/subitems}}
-        </optgroup>
-      {{/if}}
-    {{/each}}
+      {{/subitems}}
+      </optgroup>
+    {{/if}}
+  {{/each}}
 </select>
