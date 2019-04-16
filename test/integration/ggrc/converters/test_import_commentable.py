@@ -81,6 +81,8 @@ class TestCommentableImport(TestCase):
       import_data.append(("description", "{}-Description".format(model_name)))
     if model_name == "Risk":
       import_data.append(("Risk Type", "Risk type text"))
+    if model_name == "Issue":
+      import_data.append(("Due Date*", "2016-10-24T15:35:37"))
     response = self.import_data(OrderedDict(import_data))
     self._check_csv_response(response, {})
 
