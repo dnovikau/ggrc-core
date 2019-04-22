@@ -72,7 +72,7 @@ export default can.Component.extend({
       getMegaRelation: {
         get() {
           return this.attr('megaRelation') ?
-            this.attr('megaRelation') : 'parent';
+            this.attr('megaRelation') : 'child';
         },
       },
     },
