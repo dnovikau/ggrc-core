@@ -3,6 +3,7 @@
  Licensed under http://www.apache.org/licenses/LICENSE-2.0 <see LICENSE file>
  */
 
+import pubSub from '../../pub-sub'; 
 /**
  * Object Selection component
  */
@@ -13,6 +14,7 @@ export default can.Component.extend({
     selectedItems: [],
     megaRelationObj: {},
     items: [],
+    pubSub,
     // This is an array by default replace with deferred on actual load
     allItems: [],
     disabledIds: [],
@@ -116,8 +118,8 @@ export default can.Component.extend({
     'object-selection-item deselectItem': function (el, ev, item) {
       this.viewModel.deselect(item);
     },
-    'mega-relation-selection-item mapAsChild': function (el, ev, data) {
-      this.viewModel.attr('megaRelationObj')[data.id] = data.val;
+    '{pubSub} mapAsChild': function (el, ev) {
+      this.viewModel.attr('megaRelationObj')[ev.id] = ev.value;
     },
     '{viewModel} selectAllCheckboxValue': function (scope, ev, value) {
       if (value) {

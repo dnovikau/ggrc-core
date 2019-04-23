@@ -4,6 +4,7 @@
  */
 
 import template from './mega-relation-selection-item.stache';
+import pubSub from '../../pub-sub';
 
 export default can.Component.extend({
   tag: 'mega-relation-selection-item',
@@ -13,14 +14,12 @@ export default can.Component.extend({
     mapAsChild: null,
     isDisabled: false,
     id: null,
-    element: null,
-    switchRelation(event, mapAsChild) {
-      can.trigger(this.attr('element'), 'mapAsChild', {
+    switchRelation(relation) {
+      pubSub.dispatch({
+        type: 'mapAsChild',
         id: this.attr('id'),
-        val: mapAsChild ? 'child' : 'parent',
+        value: relation,
       });
-
-      event.stopPropagation();
     },
     define: {
       childRelation: {
@@ -34,10 +33,5 @@ export default can.Component.extend({
         }
       },
     }
-  },
-  events: {
-    inserted(element) {
-      this.viewModel.attr('element', element);
-    },
   },
 });
