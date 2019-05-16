@@ -196,10 +196,7 @@ describe('numberbox component', () => {
     });
 
     it('check negative int number pattern', () => {
-      const expectedPattern = '^' +
-        NEGATIVE_NUMBER_PATTERN +
-        INT_NUMBER_PATTERN +
-        '$';
+      const expectedPattern = '^' + INT_NUMBER_PATTERN + '$';
 
       viewModel.attr('enableNegative', true);
       expect(buildValidationPattern()).toEqual(expectedPattern);

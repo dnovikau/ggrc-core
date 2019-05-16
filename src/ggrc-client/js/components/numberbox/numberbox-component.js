@@ -5,9 +5,7 @@
 
 import template from './templates/numberbox-component.stache';
 
-const FLOAT_NUMBER_PATTERN = '([0-9]+([.][0-9]+){0,1})';
 const INT_NUMBER_PATTERN = '([0-9]+)';
-const NEGATIVE_NUMBER_PATTERN = '([-]{0,1})';
 
 export default can.Component.extend({
   tag: 'numberbox-component',
@@ -15,62 +13,22 @@ export default can.Component.extend({
   leakScope: true,
   viewModel: can.Map.extend({
     value: '',
-    enableFloat: false,
-    enableNegative: false,
-    disabled: false,
     attrDataId: '',
     additionalClass: '',
     placeholder: '',
-    ckeckKey(positivePattern, negativePattern, key) {
-      return this.attr('enableNegative') ?
-        !!key.match(negativePattern) :
-        !!key.match(positivePattern);
-    },
     checkIntKey(key) {
       const intPattern = /[0-9]/i;
-      const negativeIntPattern = /[0-9-]/;
-      return this.ckeckKey(intPattern, negativeIntPattern, key);
-    },
-    checkFloatKey(key) {
-      const floatPattern = /[0-9.]/;
-      const negativefloatPattern = /[0-9.-]/;
-      return this.ckeckKey(floatPattern, negativefloatPattern, key);
-    },
-    buildValidationPattern() {
-      let validationPattern = '^';
-
-      if (this.attr('enableNegative')) {
-        validationPattern += NEGATIVE_NUMBER_PATTERN;
-      }
-
-      if (this.attr('enableFloat')) {
-        validationPattern += FLOAT_NUMBER_PATTERN;
-      } else {
-        validationPattern += INT_NUMBER_PATTERN;
-      }
-
-      validationPattern += '$';
-      return validationPattern;
+      return !!key.match(intPattern);
     },
     validateValue() {
-      const validationPattern = this.buildValidationPattern();
-
-      if (!(this.attr('value') || '').match(validationPattern)) {
+      if (!(this.attr('value') || '').match(`^${INT_NUMBER_PATTERN}$`)) {
         this.attr('value', '');
       }
     },
   }),
   events: {
     '.numberbox-input keypress'(el, ev) {
-      const key = ev.key;
-      const vm = this.viewModel;
-      const enableFloat = vm.attr('enableFloat');
-
-      if (!enableFloat) {
-        if (!vm.checkIntKey(key)) {
-          ev.preventDefault();
-        }
-      } else if (!vm.checkFloatKey(key)) {
+      if (!this.viewModel.checkIntKey(ev.key)) {
         ev.preventDefault();
       }
     },
@@ -80,4 +38,4 @@ export default can.Component.extend({
   },
 });
 
-export {FLOAT_NUMBER_PATTERN, INT_NUMBER_PATTERN, NEGATIVE_NUMBER_PATTERN};
+export {INT_NUMBER_PATTERN};
