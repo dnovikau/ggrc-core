@@ -25,6 +25,33 @@ modal-issue-tracker-fields {
     }
   }
 
+  .issue-tracker__ticket-id {
+    display: flex;
+
+    &--input {
+      position: relative;
+    }
+
+    &--checker {
+      height: 100%;
+    } 
+
+    spinner-component,
+    &__checked {
+      position: absolute;
+      left: 230px;
+      bottom: 20px;
+
+      .fa.fa-times {
+        color: $red;
+      }
+
+      .fa.fa-check {
+        color: $green;
+      }
+    }   
+  }
+
   .people-sync {
     display: flex;
     align-items: center;

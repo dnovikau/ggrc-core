@@ -63,16 +63,34 @@
             {{/if}}
           </div>
         </div>
-        <div class="ggrc-form-item__multiple-row {{^isValidAttr instance "issue_tracker.issue_id"}}field-failure{{/isValidAttr}}">
-          <numberbox-component attrDataId:from="'code_txtbx'"
-                     additionalClass:from="'input-block-level'"
-                     placeholder:from="'Enter Ticket ID'"
-                     value:bind="instance.issue_tracker.issue_id">
-          </numberbox-component>
-          {{#validateAttr instance "issue_tracker.issue_id"}}
-            <label class="help-inline warning">{{this}}</label>
-          {{/validateAttr}}
+        <div class="issue-tracker__ticket-id">
+          <div class="ggrc-form-item__multiple-row issue-tracker__ticket-id--input {{#if validationError}}field-failure{{/if}}">
+            <numberbox-component attrDataId:from="'code_txtbx'"
+                                 additionalClass:from="'input-block-level'"
+                                 placeholder:from="'Enter Ticket ID'"
+                                 value:bind="instance.issue_tracker.issue_id">
+            </numberbox-component>
+            <spinner-component toggle:from="isCheckInProgress"></spinner-component>
+            {{#if isChecked}}
+              <span class="issue-tracker__ticket-id__checked">
+                {{#if isValid}}
+                  <i class="fa fa-check"></i>
+                {{else}}
+                  <i class="fa fa-times"></i>
+                {{/if}}
+              </span>
+            {{/if}}
+            {{#validationError}}
+              <label class="help-inline warning">{{this}}</label>
+            {{/if}}
+          </div>
+          <button type="button" class="btn btn-small btn-darkBlue issue-tracker__ticket-id--checker" on:el:click="checkTicketId()">
+            Check Ticket ID
+          </button>
         </div>
+        {{#if hasError}}
+          <p class="issue-tracker__ticket-id__invalid">{{msg}}</p>
+        {{/if}}
       </div>
     </div>
   {{/if}}
