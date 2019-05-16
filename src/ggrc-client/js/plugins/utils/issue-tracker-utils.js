@@ -1,7 +1,7 @@
 /*
- Copyright (C) 2019 Google Inc.
- Licensed under http://www.apache.org/licenses/LICENSE-2.0 <see LICENSE file>
- */
+  Copyright (C) 2019 Google Inc.
+  Licensed under http://www.apache.org/licenses/LICENSE-2.0 <see LICENSE file>
+*/
 
 import {notifier} from './notifiers-utils';
 
@@ -35,33 +35,44 @@ const isIssueTrackerEnabled = (instance) => {
  * @param  {Object} [defaultValues={}] issue tracker properties
  * @param  {Boolean} [canUseIssueTracker=false] should IssueTracker controls be shown
  */
-function initIssueTrackerObject(
+const initIssueTrackerObject = (
   instance = {},
   defaultValues = {},
   canUseIssueTracker = false
-) {
+) => {
   if (!isIssueTrackerInitialized(instance)) {
     instance.attr('issue_tracker', defaultValues);
   }
   instance.attr('can_use_issue_tracker', canUseIssueTracker);
-}
+};
 
-function cleanUpWarnings(instance) {
+const checkIssueTrackerTicketId = (id) => {
+  return new Promise((resolve) => {
+    const result = {
+      id,
+      valid: false,
+      msg: 'Ticket tracker ID does not exist or you do not have access to it.',
+    };
+    setTimeout(() => resolve(result), 1000);
+  });
+};
+
+const cleanUpWarnings = (instance) => {
   // clear warnings because CanJS save prev value of warning after merge
   // current instance and response
   if (instance.attr('issue_tracker._warnings')) {
     instance.attr('issue_tracker._warnings', []);
   }
-}
+};
 
-function checkWarnings(instance) {
+const checkWarnings = (instance) => {
   let warnings = instance.attr('issue_tracker._warnings');
 
   if (warnings && warnings.length) {
     let warningMessage = warnings.join('; ');
     notifier('warning', warningMessage);
   }
-}
+};
 
 export {
   issueTrackerStaticFields,
@@ -69,6 +80,7 @@ export {
   isIssueTrackerEnabled,
   isIssueCreated,
   initIssueTrackerObject,
+  checkIssueTrackerTicketId,
   checkWarnings,
   cleanUpWarnings,
 };
